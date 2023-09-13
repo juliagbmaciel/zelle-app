@@ -3,5 +3,6 @@ import Login from './Login'
 
 
 export {
-    InitialPage
+    InitialPage,
+    Login
 }

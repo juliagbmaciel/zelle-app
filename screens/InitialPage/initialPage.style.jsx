@@ -30,13 +30,16 @@ const styles = StyleSheet.create({
         fontFamily: "bold",
         color: "#fff",
         fontSize: 21.18,
+        maxWidth: 290
+    },
+    subTitle: {
+        fontFamily: "semibold",
+        color: "#ffffff8a"
+    },
+    containerContent: {
         position: "absolute",
-        bottom: 200
+        bottom: 120
     }
-
-    
-
-
 })
 
 export default styles

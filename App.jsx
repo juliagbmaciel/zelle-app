@@ -3,7 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
-import { InitialPage } from './screens';
+import { InitialPage, Login } from './screens';
+import { NavigationContainer } from '@react-navigation/native';
 
 
 
@@ -35,8 +36,21 @@ export default function App() {
 
 
   return (
-
-      <InitialPage/>
+   
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name='Initial'
+          component={InitialPage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='Login'
+          component={Login}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
 
   );
 };
