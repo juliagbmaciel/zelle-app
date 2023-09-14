@@ -42,12 +42,12 @@ export default function App() {
         <Stack.Screen
           name='Initial'
           component={InitialPage}
-          options={{ headerShown: false }}
+          options={{ headerShown: false, animation: 'slide_from_right' }}
         />
         <Stack.Screen
           name='Login'
           component={Login}
-          options={{ headerShown: false }}
+          options={{ headerShown: false, animation: 'slide_from_right' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

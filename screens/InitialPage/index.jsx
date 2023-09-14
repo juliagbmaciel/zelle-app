@@ -4,16 +4,22 @@ import React from 'react'
 import Button from '../../components/Buttons'
 import * as Animatable from 'react-native-animatable'
 
-const index = ({ navigation }) => {
 
 
+
+const InitialPage = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.backgroundBall}>
+      <Image
+      source={require('../../assets/img/logo.png')}
+      style={styles.logo}
+      />
+      <Animatable.View animation="fadeInUp" style={styles.backgroundBall}>
         <Animatable.Image
           animation="flipInY"
-          delay={500} 
+          useNativeDriver={true}
+          duration={1500}
           source={require('../../assets/img/cards.png')}
           style={styles.image}
         />
@@ -24,10 +30,10 @@ const index = ({ navigation }) => {
           <Button title={"Fazer Login"} bgColor={"#171715"} colorTitle={"#D3FE57"} onPress={() => navigation.navigate('Login')} />
         </View>
 
-      </View>
+      </Animatable.View>
     </View>
   )
 }
 
-export default index
+export default InitialPage
 

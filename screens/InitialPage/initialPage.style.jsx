@@ -39,6 +39,11 @@ const styles = StyleSheet.create({
     containerContent: {
         position: "absolute",
         bottom: 120
+    },
+    logo: {
+        position: "absolute",
+        right: 30,
+        top: 30
     }
 })
 
