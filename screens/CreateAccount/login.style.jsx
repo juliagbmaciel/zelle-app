@@ -2,8 +2,8 @@ import { StyleSheet, Dimensions, PixelRatio  } from 'react-native'
 
 
 const pixelRatio = PixelRatio.get();
-const screenWidthInPixels = Dimensions.get('window').width * pixelRatio;
-const screenHeightInPixels = Dimensions.get('window').height * pixelRatio;
+const scrWidth = Dimensions.get('window').width * pixelRatio;
+const scrHeight = Dimensions.get('window').height * pixelRatio;
 
 
 
@@ -28,7 +28,9 @@ const styles = StyleSheet.create({
         alignItems: "left",
         paddingTop: 85,
         paddingHorizontal: 50,
-        paddingBottom: 59
+        paddingBottom: 59,
+        gap: 20
+        
     },
     title: {
         color: "#fff",
@@ -39,11 +41,12 @@ const styles = StyleSheet.create({
         fontFamily: 'semibold',
         fontSize: 13.44,
         color: "#A4A4A3",
-        marginTop: 37
+        
     },
     logContent: {
         height: "100%",
         width: "100%",
+        gap: 20
 
     },
     input: {
@@ -54,18 +57,55 @@ const styles = StyleSheet.create({
         borderRadius: 13,
         padding: 10,
         color: "#fff",
-        fontSize: 14
+        fontSize: 14,
     },
     datePicker: {
         height: 120,
         marginTop: -10
     },
     dateIos: {
-        backgroundColor: "#fff",
-        height: 90,
+        color: "#fff",
+        flex: 1
     },
     button: {
-        
+        backgroundColor: "#000",
+        paddingHorizontal: 30,
+        paddingVertical: 20,
+        borderRadius: 30,
+    },
+    inputIcon: {
+        height: 40,
+        borderColor: "#B3B3B3",
+        borderWidth: 0.5,
+        marginTop: 11,
+        borderRadius: 13,
+        padding: 10,
+        color: "#fff",
+        fontSize: 14,
+        flexDirection: "row",
+        gap: 10
+    },
+    buttonPrimary: {
+        backgroundColor: "#D3FE57",
+        paddingVertical: 12,
+        paddingHorizontal: 23,
+        borderRadius:29,
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10
+    },
+    buttonsView: {
+        flexDirection: "row", 
+        position: "absolute", 
+        bottom: 30, 
+        justifyContent: "space-between",
+        width: "100%"
+    },
+    buttonsViewAnd: {
+        flexDirection: "row", 
+        justifyContent: "space-between",
+        marginVertical: "10%"
+
     }
 
 

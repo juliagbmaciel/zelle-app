@@ -1,6 +1,5 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import {  Text, View, Image } from 'react-native'
 import styles from './initialPage.style'
-import React from 'react'
 import Button from '../../components/Buttons'
 import * as Animatable from 'react-native-animatable'
 
@@ -26,8 +25,8 @@ const InitialPage = ({ navigation }) => {
         <View style={styles.containerContent}>
           <Text style={styles.title}>Gerencie seu dinheiro de maneira simplificada</Text>
           <Text style={styles.subTitle}>Conecte o dinheiro com seus objetivos</Text>
-          <Button title={"Criar conta"} bgColor={"#D3FE57"} radius={"30px"} padding={"11px 99px"} onPress={() => navigation.navigate('Login')} />
-          <Button title={"Fazer Login"} bgColor={"#171715"} colorTitle={"#D3FE57"} onPress={() => navigation.navigate('Login')} />
+          <Button title={"Criar conta"} bgColor={"#D3FE57"} radius={"30px"} padding={"11px 99px"} onPress={() => navigation.navigate('CreateAccount')} />
+          <Button title={"Fazer Login"} bgColor={"#171715"} colorTitle={"#D3FE57"} onPress={() => navigation.navigate('CreateAccount')} />
         </View>
 
       </Animatable.View>

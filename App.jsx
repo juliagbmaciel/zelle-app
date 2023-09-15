@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
-import { InitialPage, Login } from './screens';
+import { InitialPage, CreateAccount } from './screens';
 import { NavigationContainer } from '@react-navigation/native';
 
 
@@ -45,8 +45,8 @@ export default function App() {
           options={{ headerShown: false, animation: 'slide_from_right' }}
         />
         <Stack.Screen
-          name='Login'
-          component={Login}
+          name='CreateAccount'
+          component={CreateAccount}
           options={{ headerShown: false, animation: 'slide_from_right' }}
         />
       </Stack.Navigator>

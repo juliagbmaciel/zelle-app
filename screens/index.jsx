@@ -1,8 +1,8 @@
 import InitialPage from './InitialPage'
-import Login from './Login'
+import CreateAccount from './CreateAccount'
 
 
 export {
     InitialPage,
-    Login
+    CreateAccount
 }
