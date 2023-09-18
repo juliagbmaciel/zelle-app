@@ -6,7 +6,9 @@ import * as Animatable from 'react-native-animatable'
 
 
 
+
 const InitialPage = ({ navigation }) => {
+
 
   return (
     <View style={styles.container}>

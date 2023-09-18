@@ -1,15 +1,17 @@
-import { View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
-import { InitialPage, CreateAccount } from './screens';
+import { InitialPage, CreateAccount, AccountType } from './screens';
 import { NavigationContainer } from '@react-navigation/native';
+import { Provider } from 'react-redux'
+import { Store } from './src/reducers/store';
+
+
 
 
 
 const Stack = createNativeStackNavigator()
-
 
 export default function App() {
 
@@ -36,21 +38,27 @@ export default function App() {
 
 
   return (
-   
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name='Initial'
-          component={InitialPage}
-          options={{ headerShown: false, animation: 'slide_from_right' }}
-        />
-        <Stack.Screen
-          name='CreateAccount'
-          component={CreateAccount}
-          options={{ headerShown: false, animation: 'slide_from_right' }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={Store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name='Initial'
+            component={InitialPage}
+            options={{ headerShown: false, animation: 'slide_from_right' }}
+          />
+          <Stack.Screen
+            name='CreateAccount'
+            component={CreateAccount}
+            options={{ headerShown: false, animation: 'slide_from_right' }}
+          />
+          <Stack.Screen
+            name='AccountType'
+            component={AccountType}
+            options={{ headerShown: false, animation: 'fade' }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
 
   );
 };
