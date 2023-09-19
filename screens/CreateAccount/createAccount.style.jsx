@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
         fontFamily: 'semibold',
         fontSize: 13.44,
         color: "#A4A4A3",
-        
     },
     logContent: {
         height: "100%",
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
     },
     dateIos: {
         color: "#fff",
-        flex: 1
+        height: 90
     },
     button: {
         backgroundColor: "#000",
@@ -105,7 +104,11 @@ const styles = StyleSheet.create({
         flexDirection: "row", 
         justifyContent: "space-between",
         marginVertical: "10%"
-
+    },
+    buttonsViewSec: {
+        flexDirection: 'row',
+        width: "100%",
+        justifyContent: 'space-between', 
     }
 
 

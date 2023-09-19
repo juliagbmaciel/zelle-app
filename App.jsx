@@ -6,6 +6,8 @@ import { InitialPage, CreateAccount, AccountType } from './screens';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux'
 import { Store } from './src/reducers/store';
+import { useEffect } from 'react';
+import { BackHandler } from 'react-native';
 
 
 
@@ -24,7 +26,10 @@ export default function App() {
     semibold: require('./assets/fonts/Montserrat-SemiBold.ttf'),
   })
 
+
+
   const onLayoutRootView = useCallback(async () => {
+
 
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
@@ -49,12 +54,12 @@ export default function App() {
           <Stack.Screen
             name='CreateAccount'
             component={CreateAccount}
-            options={{ headerShown: false, animation: 'slide_from_right' }}
+            options={{ headerShown: false, animation: 'slide_from_right', gestureEnabled: false }}
           />
           <Stack.Screen
             name='AccountType'
             component={AccountType}
-            options={{ headerShown: false, animation: 'fade' }}
+            options={{ headerShown: false, animation: 'none' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
