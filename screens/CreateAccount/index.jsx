@@ -13,14 +13,14 @@ import * as Animatable from 'react-native-animatable'
 import styles from './createAccount.style.jsx'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { useSelector, useDispatch } from 'react-redux'
-import { setCompleteName, setSocialName, resetState  } from '../../src/reducers/actions.jsx'
+import { setCompleteName, setSocialName, resetState } from '../../src/reducers/actions.jsx'
 
 
 
 
 const CreateAccount = ({ navigation }) => {
 
-  const {completeName, socialName} = useSelector(state => {
+  const { completeName, socialName } = useSelector(state => {
     return state.userReducer
   })
   const dispatch = useDispatch()
@@ -65,12 +65,12 @@ const CreateAccount = ({ navigation }) => {
     } if (completeName.length < 10) {
       setError('*Insira ao menos 10 caracteres')
       return
-    } if (dateOfBirth === ''){
+    } if (dateOfBirth === '') {
       completeName !== '' && setError('')
       setErrorDate('*Campo obrigatório')
       return
     }
-     if (socialName !== ''){
+    if (socialName !== '') {
       console.log(socialName)
       dispatch(setSocialName(socialName))
     }
@@ -78,8 +78,8 @@ const CreateAccount = ({ navigation }) => {
     setError('')
     setErrorDate('')
     navigation.navigate('AccountType')
-    
-  
+
+
   }
 
 
@@ -182,19 +182,19 @@ const CreateAccount = ({ navigation }) => {
             )}
           </View>
           {!showPicker && (
-                      <View style={Platform.OS === "ios" ? styles.buttonsView : styles.buttonsViewAnd} >
-                      <TouchableOpacity style={styles.buttonPrimary} onPress={() => { 
-                        dispatch(resetState())
-                        navigation.goBack() 
-                        }}>
-                        <Ionicons name='arrow-back' size={20} />
-                        <Text>Voltar</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity style={styles.buttonPrimary} onPress={validForm}>
-                        <Text>Próximo</Text>
-                        <Ionicons name='arrow-forward' size={20} />
-                      </TouchableOpacity>
-                    </View>
+            <View style={Platform.OS === "ios" ? styles.buttonsView : styles.buttonsViewAnd} >
+              <TouchableOpacity style={styles.buttonPrimary} onPress={() => {
+                dispatch(resetState())
+                navigation.goBack()
+              }}>
+                <Ionicons name='arrow-back' size={20} />
+                <Text>Voltar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.buttonPrimary} onPress={validForm}>
+                <Text>Próximo</Text>
+                <Ionicons name='arrow-forward' size={20} />
+              </TouchableOpacity>
+            </View>
 
           )}
 

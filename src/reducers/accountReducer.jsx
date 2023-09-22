@@ -3,8 +3,11 @@ import {
     SET_SOCIAL_NAME,
     RESET_STATE,
     SET_TYPE_ACCOUNT,
-    SET_RG, 
-    SET_CPF
+    SET_RG,
+    SET_CPF,
+    SET_INSC_ESTADUAL,
+    SET_CNPJ,
+    SET_INSC_MUNICIPAL
 } from "./actions";
 
 const initialSTate = {
@@ -33,6 +36,12 @@ function userReducer(state = initialSTate, action) {
             return { ...state, rg: action.payload }
         case SET_CPF:
             return { ...state, cpf: action.payload }
+        case SET_INSC_MUNICIPAL:
+            return { ...state, inscMunicipal: action.payload }
+        case SET_INSC_ESTADUAL:
+            return { ...state, inscEstadual: action.payload }
+        case SET_CNPJ:
+            return { ...state, cnpj: action.payload }
         default:
             return state;
     }

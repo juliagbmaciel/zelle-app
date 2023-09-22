@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     logContent: {
         height: "100%",
         width: "100%",
-        gap: 20
+        gap: 20,
 
     },
     input: {
@@ -109,6 +109,36 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: "100%",
         justifyContent: 'space-between', 
+    },
+    keyboardOpenContainer: {
+        backgroundColor: "#383837",
+        position: 'absolute',
+        width: "100%",
+        height: "90%",
+        zIndex: 1,
+        justifyContent: 'center'
+    },
+    buttonInactive: {
+       
+        paddingVertical: 12,
+        paddingHorizontal: 23,
+        borderRadius:29,
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10
+    },
+    inputPassword: {
+        height: 40,
+        borderColor: "#B3B3B3",
+        borderWidth: 0.5,
+        marginTop: 11,
+        borderRadius: 13,
+        padding: 10,
+        color: "#fff",
+        fontSize: 14,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
     }
 
 

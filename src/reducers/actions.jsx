@@ -4,6 +4,10 @@ export const RESET_STATE = 'RESET_STATE'
 export const SET_TYPE_ACCOUNT = 'SET_TYPE_ACCOUNT'
 export const SET_RG = 'SET_RG'
 export const SET_CPF = 'SET_CPF'
+export const SET_CNPJ = 'SET_CNPJ'
+export const SET_INSC_ESTADUAL = 'SET_INSC_ESTADUAL'
+export const SET_INSC_MUNICIPAL = 'SET_INSC_MUNICIPAL'
+
 
 
 export const setCompleteName = name => dispatch => {
@@ -39,6 +43,29 @@ export const setCPF = cpf => dispatch => {
       type: SET_CPF,
       payload: cpf
     });
+};
+
+export const setCNPJ = cnpj => dispatch => {
+  
+  dispatch({
+    type: SET_CNPJ,
+    payload: cnpj
+  });
+};
+
+export const setInscEstadual = inscEstadual => dispatch => {
+  dispatch({
+    type: SET_INSC_ESTADUAL,
+    payload: inscEstadual
+  });
+};
+
+export const setInscMunicipal = inscMunicipal => dispatch => {
+  
+  dispatch({
+    type: SET_INSC_MUNICIPAL,
+    payload: inscMunicipal
+  });
 };
 
 

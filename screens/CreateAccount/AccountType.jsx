@@ -7,46 +7,62 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setTypeAccount } from '../../src/reducers/actions.jsx'
 import * as Animatable from 'react-native-animatable'
 import { Ionicons } from '@expo/vector-icons'
-import { setCPF, setRG } from '../../src/reducers/actions.jsx'
+import { setCPF, setRG, setInscEstadual, setInscMunicipal, setCNPJ } from '../../src/reducers/actions.jsx'
+import { Formik } from 'formik'
+import * as Yup from 'yup'
 
 
-const AccountType = () => {
+const AccountType = ({navigation}) => {
 
-  const [errorRG, setErrorRG ] = useState('')
-  const [errorCPF, setErrorCPF ] = useState('')
+  const [loader, setLoader] = useState(false)
+
+  const validationSchema = Yup.object().shape({
+    cpf: Yup.string()
+      .min(11, '*CPF inválido')
+      .required('*Campo obrigatório'),
+    rg: Yup.string()
+      .min(9, 'RG inválido')
+      .required('*Campo brigatório'),
+  })
+
+  const validationSchemaPJ = Yup.object().shape({
+    cnpj: Yup.string()
+      .min(11, '*CNPJ inválido')
+      .required('*Campo obrigatório'),
+    inscEstadual: Yup.string()
+      .required('*Campo brigatório'),
+    inscMunicipal: Yup.string()
+      .required('*Campo brigatório'),
+
+  })
 
   const dispatch = useDispatch()
 
-  const { accountType, rg, cpf, cnpj, inscEstadual, inscMunicipal } = useSelector(state => {
+
+  const { accountType, cnpj, inscEstadual, inscMunicipal, cpf, rg } = useSelector(state => {
     return state.userReducer
   })
+
+
 
   const handleTypeAccount = (type) => {
     dispatch(setTypeAccount(type))
   }
 
-  const validInfos = (value, type) => {
-    const valueFormated = value.replace(/[.-]/g, '');
-    if (type.includes("RG") && valueFormated.length < 9){
-      setErrorRG("*RG inválido")
-      dispatch(setRG(''))
-      return
+  const validForm = (values) => {
+    if (accountType === "Pessoa Física"){
+      dispatch(setRG(values.rg))
+      dispatch(setCPF(values.cpf))
+    } else{
+      dispatch(setInscEstadual(values.inscEstadual))
+      dispatch(setInscMunicipal(values.inscMunicipal))
+      dispatch(setCNPJ(values.cnpj))
     }
-
-    if (type.includes("CPF") && valueFormated.length < 11 ){
-      setErrorCPF('*CPF inválido')
-      dispatch(setCPF(''))
-      return
-    }
-    setErrorCPF('')
-    setErrorRG('')
-    type.includes('CPF') ? dispatch(setCPF(valueFormated)) : dispatch(setRG(valueFormated))
+    navigation.navigate('Credentials')
     
   }
 
-  const sendForm = () => {
-    console.log(cpf, rg)
-  }
+
 
   return (
     <View style={styles.container}>
@@ -70,65 +86,146 @@ const AccountType = () => {
             <Animatable.View animation={'fadeIn'} style={{ backgroundColor: "#D3FE57", paddingHorizontal: 23, paddingVertical: 11, borderRadius: 30 }}>
               <Text style={{ color: "#171715", fontFamily: "bold" }}>{accountType}</Text>
             </Animatable.View>
-            <View>
-            <Input label={"RG (registro geral)"} maxLength={12} keyboardType={"numeric"} onChange={validInfos}/>
-            {errorRG !== '' && ( 
-              <Text style={{color: "red", fontFamily: "semibold"}}>
-                {errorRG}
-              </Text>
-            )}
-            </View>
-            <View>
-            <Input label={"CPF"} maxLength={14} keyboardType={"numeric"} onChange={validInfos}/>
-            {errorCPF !== '' && ( 
-              <Text style={{color: "red", fontFamily: "semibold"}}>
-                {errorCPF}
-              </Text>
-            )}
-            </View>
-            <View style={Platform.OS === "ios" ? styles.buttonsView : styles.buttonsViewAnd} >
-              <TouchableOpacity style={styles.buttonPrimary} onPress={() => {
-                dispatch(setTypeAccount(''))
-              }}>
-                <Ionicons name='arrow-back' size={20} />
-                <Text>Voltar</Text>
-              </TouchableOpacity>
+            <Formik
+              initialValues={{ cpf: '', rg: '' }}
+              validationSchema={validationSchema}
+              onSubmit={(values) => validForm(values)}
+            >
+              {({ handleChange, handleBlur, handleSubmit, touched, errors, isValid, setFieldTouched, values }) => (
+                <View style={styles.logContent}>
+                  {values.rg == '' && values.cpf == '' ? isValid = false : isValid = isValid}
 
-              <TouchableOpacity style={styles.buttonPrimary} onPress={sendForm}>
-                <Text>Próximo</Text>
-                <Ionicons name='arrow-forward' size={20} />
-              </TouchableOpacity>
-            </View>
+                  <View>
+                    <Input
+                      label={"RG (registro geral)"}
+                      maxLength={12} keyboardType={"numeric"}
+                      onChange={handleChange('rg')}
+                      onFocus={() => { setFieldTouched('rg') }}
+                      onBlur={() => { setFieldTouched('rg', '') }}
+                    />
+                    {touched.rg && errors.rg && (
+                      <Text style={{ fontFamily: 'semibold', color: "red" }}>{errors.rg}</Text>
+                    )}
+                  </View>
+
+
+                  <View>
+                    <Input
+                      label={"CPF"}
+                      maxLength={14}
+                      keyboardType={"numeric"}
+                      onChange={handleChange('cpf')}
+                      onFocus={() => { setFieldTouched('cpf') }}
+                      onBlur={() => { setFieldTouched('cpf', '') }}
+                    />
+                    {touched.cpf && errors.cpf && (
+                      <Text style={{ fontFamily: 'semibold', color: "red" }}>{errors.cpf}</Text>
+                    )}
+                  </View>
+
+
+                  <View style={Platform.OS === "ios" ? styles.buttonsView : styles.buttonsViewAnd} >
+
+
+                    <TouchableOpacity style={styles.buttonPrimary} onPress={() => {
+                      dispatch(setTypeAccount(''))
+                    }}>
+                      <Ionicons name='arrow-back' size={20} />
+                      <Text style={{ fontFamily: 'regular' }}>Voltar</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPressIn={isValid ? handleSubmit : () => { }} style={isValid ? styles.buttonPrimary : styles.buttonInactive} onPress={() => { }}>
+                      <Text style={isValid ? { fontFamily: 'regular' } : { color: "#313131" }}>Próximo</Text>
+                      <Ionicons style={!isValid && { color: "#313131" }} name='arrow-forward' size={20} />
+                    </TouchableOpacity>
+
+
+                  </View>
+                </View>
+              )}
+            </Formik>
           </View>
-
         )}
+
+
         {accountType === 'Pessoa Jurídica' && (
+
           <View style={styles.logContent}>
             <Animatable.View animation={'fadeIn'} style={{ backgroundColor: "#171715", paddingHorizontal: 23, paddingVertical: 11, borderRadius: 30 }}>
               <Text style={{ color: "#D3FE57", fontFamily: "bold" }}>{accountType}</Text>
             </Animatable.View>
-            <View>
-            <Input label={"CNPJ"} maxLength={100} keyboardType={"default"} onChange={() => console.log('onchangr')}/>
-            </View>
-            <View>
-              <Input label={"Inscrição estadual"} maxLength={100} keyboardType={"default"} onChange={() => console.log('onchangr')}/>
-            </View>
-            <View>
-            <Input label={"Inscrição municipal"} maxLength={100} keyboardType={"default"} onChange={() => console.log('onchangr')}/>
-            </View>
-            <View style={Platform.OS === "ios" ? styles.buttonsView : styles.buttonsViewAnd} >
-              <TouchableOpacity style={styles.buttonPrimary} onPress={() => {
-                dispatch(setTypeAccount(''))
-              }}>
-                <Ionicons name='arrow-back' size={20} />
-                <Text>Voltar</Text>
-              </TouchableOpacity>
+            <Formik
+              initialValues={{ cnpj: '', inscEstadual: '', inscMunicipal: '' }}
+              validationSchema={validationSchemaPJ}
+              onSubmit={(values) => validForm(values)}
+            >
+              {({ handleChange, handleBlur, handleSubmit, touched, errors, isValid, setFieldTouched, values }) => (
 
-              <TouchableOpacity style={styles.buttonPrimary} >
-                <Text>Próximo</Text>
-                <Ionicons name='arrow-forward' size={20} />
-              </TouchableOpacity>
-            </View>
+                <View style={styles.logContent}>
+                  {values.cnpj == '' && values.inscEstadual == '' && values.inscMunicipal == '' ? isValid = false : isValid = isValid}
+                  {console.log(isValid)}
+                  <View>
+                    <Input
+                      label={"CNPJ"}
+                      maxLength={100}
+                      keyboardType={"default"}
+                      onChange={handleChange('cnpj')}
+                      onFocus={() => { setFieldTouched('cnpj') }}
+                      onBlur={() => { setFieldTouched('cnpj', '') }}
+                    />
+                    {touched.cnpj && errors.cnpj && (
+                      <Text style={{ fontFamily: 'semibold', color: "red" }}>{errors.cnpj}</Text>
+                    )}
+
+                  </View>
+
+                  <View>
+                    <Input
+                      label={"Inscrição estadual"}
+                      maxLength={100}
+                      keyboardType={"default"}
+                      onChange={handleChange('inscEstadual')}
+                      onFocus={() => { setFieldTouched('inscEstadual') }}
+                      onBlur={() => { setFieldTouched('inscEstadual', '') }}
+                    />
+                    {touched.inscEstadual && errors.inscEstadual && (
+                      <Text style={{ fontFamily: 'semibold', color: "red" }}>{errors.inscEstadual}</Text>
+                    )}
+                  </View>
+
+                  <View>
+                    <Input
+
+                      label={"Inscrição municipal"}
+                      maxLength={100}
+                      keyboardType={"default"}
+                      onChange={handleChange('inscMunicipal')}
+                      onFocus={() => { setFieldTouched('inscMunicipal') }}
+                      onBlur={() => { setFieldTouched('inscMunicipal', '') }}
+                    />
+                    {touched.inscMunicipal && errors.inscMunicipal && (
+                      <Text style={{ fontFamily: 'semibold', color: "red" }}>{errors.inscMunicipal}</Text>
+                    )}
+
+                  </View>
+
+                  <View style={Platform.OS === "ios" ? styles.buttonsView : styles.buttonsViewAnd} >
+                    <TouchableOpacity style={styles.buttonPrimary} onPress={() => {
+                      dispatch(setTypeAccount(''))
+                    }}>
+                      <Ionicons name='arrow-back' size={20} />
+                      <Text>Voltar</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPressIn={isValid ? handleSubmit : () => { }} style={isValid ? styles.buttonPrimary : styles.buttonInactive} onPress={() => { }}>
+                      <Text style={isValid ? { fontFamily: 'regular' } : { color: "#313131" }}>Próximo</Text>
+                      <Ionicons style={!isValid && { color: "#313131" }} name='arrow-forward' size={20} />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )}
+            </Formik>
+
 
           </View>
 
@@ -145,4 +242,3 @@ const AccountType = () => {
 }
 
 export default AccountType
-

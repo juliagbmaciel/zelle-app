@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
-import { InitialPage, CreateAccount, AccountType } from './screens';
+import { InitialPage, CreateAccount, AccountType, Credentials } from './screens';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux'
 import { Store } from './src/reducers/store';
@@ -59,6 +59,11 @@ export default function App() {
           <Stack.Screen
             name='AccountType'
             component={AccountType}
+            options={{ headerShown: false, animation: 'none' }}
+          />
+          <Stack.Screen
+            name='Credentials'
+            component={Credentials}
             options={{ headerShown: false, animation: 'none' }}
           />
         </Stack.Navigator>
