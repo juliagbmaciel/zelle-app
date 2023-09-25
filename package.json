@@ -26,6 +26,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.72.4",
     "react-native-animatable": "^1.3.3",
+    "react-native-exit-app": "^2.0.0",
     "react-native-gesture-handler": "~2.12.0",
     "react-native-image-slider-box": "^2.0.7",
     "react-native-modal-datetime-picker": "^17.1.0",

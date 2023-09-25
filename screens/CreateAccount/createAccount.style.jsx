@@ -1,9 +1,5 @@
-import { StyleSheet, Dimensions, PixelRatio  } from 'react-native'
+import { StyleSheet } from 'react-native'
 
-
-const pixelRatio = PixelRatio.get();
-const scrWidth = Dimensions.get('window').width * pixelRatio;
-const scrHeight = Dimensions.get('window').height * pixelRatio;
 
 
 

@@ -1,4 +1,4 @@
-import { Image, Text, View, TextInput } from 'react-native'
+import { Image, Text, View, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import styles from './createAccount.style'
 import React, { useState } from 'react'
 import * as Yup from 'yup'
@@ -6,6 +6,7 @@ import { Formik } from 'formik'
 import Input from '../../components/Input'
 import { Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native'
+
 
 const Credentials = ({ navigation }) => {
 
@@ -21,6 +22,7 @@ const Credentials = ({ navigation }) => {
 
 
   return (
+    <TouchableWithoutFeedback onPressIn={() => Keyboard.dismiss()}>
     <View style={styles.container}>
       <View style={styles.logo}>
         <Image
@@ -32,7 +34,7 @@ const Credentials = ({ navigation }) => {
         <Formik
           initialValues={{ email: '', password: '' }}
           validationSchema={validationSchema}
-          onSubmit={(values) => {console.log(values.email, values.password)}}
+          onSubmit={(values) => {navigation.navigate("FirstWelcome")}}
         >
           {({ handleChange, handleBlur, handleSubmit, touched, errors, isValid, setFieldTouched, values }) => (
             <View style={styles.logContent}>
@@ -85,13 +87,10 @@ const Credentials = ({ navigation }) => {
                   <Ionicons name='arrow-back' size={20} />
                   <Text style={{ fontFamily: 'regular' }}>Voltar</Text>
                 </TouchableOpacity>
-
                 <TouchableOpacity onPressIn={isValid ? handleSubmit : () => { }} style={isValid ? styles.buttonPrimary : styles.buttonInactive} onPress={() => { }}>
                   <Text style={isValid ? { fontFamily: 'regular' } : { color: "#313131" }}>Próximo</Text>
                   <Ionicons style={!isValid && { color: "#313131" }} name='arrow-forward' size={20} />
                 </TouchableOpacity>
-
-
               </View>
 
 
@@ -102,6 +101,7 @@ const Credentials = ({ navigation }) => {
       </View>
 
     </View>
+    </TouchableWithoutFeedback>
   )
 }
 

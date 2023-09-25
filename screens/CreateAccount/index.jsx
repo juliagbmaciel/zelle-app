@@ -13,7 +13,7 @@ import * as Animatable from 'react-native-animatable'
 import styles from './createAccount.style.jsx'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { useSelector, useDispatch } from 'react-redux'
-import { setCompleteName, setSocialName, resetState } from '../../src/reducers/actions.jsx'
+import { setCompleteName, setSocialName, resetState, TouchableWithoutFeedback, Keyboard } from '../../src/reducers/actions.jsx'
 
 
 
@@ -90,6 +90,7 @@ const CreateAccount = ({ navigation }) => {
 
 
   return (
+    <TouchableWithoutFeedback onPressIn={() => Keyboard.dismiss() }>
     <View animation="fadeInRight" style={styles.container}>
       <View style={styles.logo}>
 
@@ -206,6 +207,7 @@ const CreateAccount = ({ navigation }) => {
 
       </Animatable.View>
     </View>
+    </TouchableWithoutFeedback>
   )
 }
 

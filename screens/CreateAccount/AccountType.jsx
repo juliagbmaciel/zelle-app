@@ -1,4 +1,4 @@
-import { Image, Text, View, TouchableOpacity, TextInput } from 'react-native'
+import { Image, Text, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useState } from 'react'
 import styles from './createAccount.style'
 import Button from '../../components/Buttons'
@@ -65,6 +65,7 @@ const AccountType = ({navigation}) => {
 
 
   return (
+    <TouchableWithoutFeedback onPressIn={() => Keyboard.dismiss()}>
     <View style={styles.container}>
       <View style={styles.logo}>
         <Image
@@ -122,11 +123,7 @@ const AccountType = ({navigation}) => {
                       <Text style={{ fontFamily: 'semibold', color: "red" }}>{errors.cpf}</Text>
                     )}
                   </View>
-
-
-                  <View style={Platform.OS === "ios" ? styles.buttonsView : styles.buttonsViewAnd} >
-
-
+                  <View style={Platform.OS === "ios" ? styles.buttonsViewAnd : styles.buttonsViewAnd} >
                     <TouchableOpacity style={styles.buttonPrimary} onPress={() => {
                       dispatch(setTypeAccount(''))
                     }}>
@@ -146,10 +143,7 @@ const AccountType = ({navigation}) => {
             </Formik>
           </View>
         )}
-
-
         {accountType === 'Pessoa Jurídica' && (
-
           <View style={styles.logContent}>
             <Animatable.View animation={'fadeIn'} style={{ backgroundColor: "#171715", paddingHorizontal: 23, paddingVertical: 11, borderRadius: 30 }}>
               <Text style={{ color: "#D3FE57", fontFamily: "bold" }}>{accountType}</Text>
@@ -160,7 +154,6 @@ const AccountType = ({navigation}) => {
               onSubmit={(values) => validForm(values)}
             >
               {({ handleChange, handleBlur, handleSubmit, touched, errors, isValid, setFieldTouched, values }) => (
-
                 <View style={styles.logContent}>
                   {values.cnpj == '' && values.inscEstadual == '' && values.inscMunicipal == '' ? isValid = false : isValid = isValid}
                   {console.log(isValid)}
@@ -178,7 +171,6 @@ const AccountType = ({navigation}) => {
                     )}
 
                   </View>
-
                   <View>
                     <Input
                       label={"Inscrição estadual"}
@@ -195,7 +187,6 @@ const AccountType = ({navigation}) => {
 
                   <View>
                     <Input
-
                       label={"Inscrição municipal"}
                       maxLength={100}
                       keyboardType={"default"}
@@ -208,7 +199,6 @@ const AccountType = ({navigation}) => {
                     )}
 
                   </View>
-
                   <View style={Platform.OS === "ios" ? styles.buttonsView : styles.buttonsViewAnd} >
                     <TouchableOpacity style={styles.buttonPrimary} onPress={() => {
                       dispatch(setTypeAccount(''))
@@ -216,7 +206,6 @@ const AccountType = ({navigation}) => {
                       <Ionicons name='arrow-back' size={20} />
                       <Text>Voltar</Text>
                     </TouchableOpacity>
-
                     <TouchableOpacity onPressIn={isValid ? handleSubmit : () => { }} style={isValid ? styles.buttonPrimary : styles.buttonInactive} onPress={() => { }}>
                       <Text style={isValid ? { fontFamily: 'regular' } : { color: "#313131" }}>Próximo</Text>
                       <Ionicons style={!isValid && { color: "#313131" }} name='arrow-forward' size={20} />
@@ -225,19 +214,11 @@ const AccountType = ({navigation}) => {
                 </View>
               )}
             </Formik>
-
-
           </View>
-
         )}
-
-
-
       </View>
-
-
-
     </View>
+    </TouchableWithoutFeedback>
   )
 }
 
