@@ -6,8 +6,7 @@ import { InitialPage, CreateAccount, AccountType, Credentials, FirstWelcome } fr
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux'
 import { Store } from './src/reducers/store';
-import { useEffect } from 'react';
-import { BackHandler } from 'react-native';
+
 
 
 

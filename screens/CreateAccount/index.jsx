@@ -5,7 +5,9 @@ import {
   TextInput,
   TouchableOpacity,
   Pressable,
-  Platform
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import React, { useState } from 'react'
@@ -13,16 +15,15 @@ import * as Animatable from 'react-native-animatable'
 import styles from './createAccount.style.jsx'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { useSelector, useDispatch } from 'react-redux'
-import { setCompleteName, setSocialName, resetState, TouchableWithoutFeedback, Keyboard } from '../../src/reducers/actions.jsx'
+import { setCompleteName, setSocialName, resetState } from '../../src/reducers/actions.jsx'
 
 
 
 
 const CreateAccount = ({ navigation }) => {
 
-  const { completeName, socialName } = useSelector(state => {
-    return state.userReducer
-  })
+
+  
   const dispatch = useDispatch()
 
   const [error, setError] = useState('')
@@ -32,6 +33,10 @@ const CreateAccount = ({ navigation }) => {
 
   const [date, setDate] = useState(new Date())
   const [showPicker, setShowPicker] = useState(false)
+
+  const { completeName, socialName } = useSelector(state => {
+    return state.userReducer
+  })
 
   const onChange = ({ type }, selectedDate) => {
     if (type === "set") {
@@ -78,15 +83,7 @@ const CreateAccount = ({ navigation }) => {
     setError('')
     setErrorDate('')
     navigation.navigate('AccountType')
-
-
   }
-
-
-
-
-
-
 
 
   return (

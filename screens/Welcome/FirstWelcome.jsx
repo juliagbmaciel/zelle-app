@@ -6,6 +6,7 @@ import styles from './firstWelcome.style'
 
 import React, { useEffect } from 'react'
 
+
 const FirstWelcome = ({ navigation }) => {
 
     const { completeName } = useSelector(state => {
@@ -14,34 +15,35 @@ const FirstWelcome = ({ navigation }) => {
     const dispatch = useDispatch()
     const names = completeName.split(' ')
     firstName = names[0]
+    
+
+    navigation.removeListener('beforeRemove');
 
     useEffect(() => {
-        const sla = navigation.addListener('beforeRemove', e => {
+        navigation.addListener('beforeRemove', e => {
             
             e.preventDefault();
+            console.log('aaaaaaaaa')
             Alert.alert(
-                '',
-                'Deseja finalizar o app?',
+                'Discard changes?',
+                'You have unsaved changes. Are you sure to discard them and leave the screen?',
                 [
+                  { text: "Don't leave", style: 'cancel', onPress: () => {} },
                   {
-                    text: 'Cancelar',
-                    onPress: () => console.log('Ação cancelada'),
-                    style: 'cancel',
-                  },
-                  {
-                    text: 'Sair',
-                    onPress: async () => {
-                        await navigation.navigate('Initial')
-                        console.log('navigaaaaaaaaaaaaa')
-                        dispatch(resetState())
-                        BackHandler.exitApp()
+                    text: 'Discard',
+                    style: 'destructive',
+                    onPress: () => {
+                        dispatch(resetState)
+                        navigation.dispatch(e.data.action)
                     },
                   },
-                ],
-                { cancelable: false }
+                ]
               );
+
         })
-    })
+
+        }, []);
+    
 
     return (
         <View style={styles.container}>

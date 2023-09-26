@@ -1,14 +1,20 @@
 import { Image, Text, View, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import styles from './createAccount.style'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
 import Input from '../../components/Input'
 import { Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native'
+import { useSelector } from 'react-redux'
+import { useRoute } from '@react-navigation/native'
 
 
 const Credentials = ({ navigation }) => {
+
+  const { completeName } = useSelector(state => {
+    return state.userReducer
+  })
 
   const [obscureText, setObscureText] = useState(true)
 
