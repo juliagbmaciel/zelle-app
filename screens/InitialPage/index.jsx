@@ -2,6 +2,8 @@ import {  Text, View, Image } from 'react-native'
 import styles from './initialPage.style'
 import Button from '../../components/Buttons'
 import * as Animatable from 'react-native-animatable'
+import { useSelector, useDispatch } from 'react-redux'
+import { setSigned } from '../../src/reducers/actions'
 
 
 
@@ -10,8 +12,11 @@ import * as Animatable from 'react-native-animatable'
 
 const InitialPage = ({ navigation }) => {
 
+  // const dispatch = useDispatch()
+  // const { signed } = useSelector(state => {
+  //   return state.userReducer
+  // })
 
-  
   return (
     <View style={styles.container}>
       <Image

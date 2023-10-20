@@ -1,18 +1,22 @@
 import { Image, Text, View, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import styles from './createAccount.style'
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
-import Input from '../../components/Input'
 import { Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native'
 import { useSelector } from 'react-redux'
-import { useRoute } from '@react-navigation/native'
+import { axiosInstance } from '../../src/services/api'
+
 
 
 const Credentials = ({ navigation }) => {
 
-  const { completeName } = useSelector(state => {
+  const { 
+    completeName, socialName, 
+    dateOfBirth, accountType, rg, cpf, 
+    cnpj, inscEstadual, inscMunicipal, signed  
+  } = useSelector(state => {
     return state.userReducer
   })
 
@@ -20,11 +24,35 @@ const Credentials = ({ navigation }) => {
 
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('*Insira um e-mail válido').required('*Campo obrigatório'),
     password: Yup.string()
       .min(8, '*Senha deve conter no mínimo 8 caracteres')
       .required('*Campo brigatório'),
   })
+
+  const handleSignIn = async (values) => {
+    
+
+      console.log('entrei')
+      if (accountType === 'Pessoa Física'){
+          const response = await axiosInstance.post('/auth/users/', {
+            cpf: cpf,
+            password: values.password,
+            username: completeName
+          })
+          console.log(response.data)
+  
+      }
+
+      // console.log(response.data)
+
+      // const infos = await axiosInstance.get('/clients/', {
+      //   headers: {
+      //     'Authorization': `Token ${response.data.auth_token}`
+      //   }
+      // })
+      // console.log(infos.data)
+      
+  }
 
 
   return (
@@ -38,26 +66,14 @@ const Credentials = ({ navigation }) => {
       <View style={styles.mainContent}>
         <Text style={styles.title}>Criar conta</Text>
         <Formik
-          initialValues={{ email: '', password: '' }}
+          initialValues={{ password: '' }}
           validationSchema={validationSchema}
-          onSubmit={(values) => {navigation.navigate("FirstWelcome")}}
+          onSubmit={(values) => navigation.navigate('FirstWelcome')}
         >
           {({ handleChange, handleBlur, handleSubmit, touched, errors, isValid, setFieldTouched, values }) => (
             <View style={styles.logContent}>
-              {values.email == '' && values.password == '' ? isValid = false : isValid = isValid}
-
-
+              { values.password == '' ? isValid = false : isValid = isValid}
               <View>
-                <Input
-                  label={"E-mail"}
-                  keyboardType={"email-address"}
-                  onChange={handleChange('email')}
-                  onFocus={() => { setFieldTouched('email') }}
-                  onBlur={() => { setFieldTouched('email', '') }}
-                />
-                {touched.email && errors.email && (
-                  <Text style={{ fontFamily: 'semibold', color: "red" }}>{errors.email}</Text>
-                )}
               </View>
               <View>
                 <Text style={styles.label}>
@@ -93,7 +109,7 @@ const Credentials = ({ navigation }) => {
                   <Ionicons name='arrow-back' size={20} />
                   <Text style={{ fontFamily: 'regular' }}>Voltar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPressIn={isValid ? handleSubmit : () => { }} style={isValid ? styles.buttonPrimary : styles.buttonInactive} onPress={() => { }}>
+                <TouchableOpacity onPressIn={isValid ? handleSignIn : () => { }} style={isValid ? styles.buttonPrimary : styles.buttonInactive} onPress={() => handleSignIn}>
                   <Text style={isValid ? { fontFamily: 'regular' } : { color: "#313131" }}>Próximo</Text>
                   <Ionicons style={!isValid && { color: "#313131" }} name='arrow-forward' size={20} />
                 </TouchableOpacity>

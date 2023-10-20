@@ -23,7 +23,6 @@ const FirstWelcome = ({ navigation }) => {
         navigation.addListener('beforeRemove', e => {
             
             e.preventDefault();
-            console.log('aaaaaaaaa')
             Alert.alert(
                 'Discard changes?',
                 'You have unsaved changes. Are you sure to discard them and leave the screen?',

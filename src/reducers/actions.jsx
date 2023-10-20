@@ -7,6 +7,8 @@ export const SET_CPF = 'SET_CPF'
 export const SET_CNPJ = 'SET_CNPJ'
 export const SET_INSC_ESTADUAL = 'SET_INSC_ESTADUAL'
 export const SET_INSC_MUNICIPAL = 'SET_INSC_MUNICIPAL'
+export const SET_TOKEN = 'SET_TOKEN'
+export const SET_SIGNED = 'SET_SIGNED'
 
 
 
@@ -65,6 +67,23 @@ export const setInscMunicipal = inscMunicipal => dispatch => {
   dispatch({
     type: SET_INSC_MUNICIPAL,
     payload: inscMunicipal
+  });
+};
+
+export const setToken = token => dispatch => {
+  
+  dispatch({
+    type: SET_TOKEN,
+    payload: token
+  });
+};
+
+
+export const setSigned = signed => dispatch => {
+  
+  dispatch({
+    type: SET_SIGNED,
+    payload: signed
   });
 };
 

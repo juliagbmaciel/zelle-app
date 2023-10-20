@@ -6,6 +6,8 @@ import { InitialPage, CreateAccount, AccountType, Credentials, FirstWelcome } fr
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux'
 import { Store } from './src/reducers/store';
+import Routes from './src/routes';
+
 
 
 
@@ -39,38 +41,12 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
-
+  console.log(Routes)
 
   return (
     <Provider store={Store}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name='Initial'
-            component={InitialPage}
-            options={{ headerShown: false, animation: 'slide_from_right' }}
-          />
-          <Stack.Screen
-            name='CreateAccount'
-            component={CreateAccount}
-            options={{ headerShown: false, animation: 'slide_from_right', gestureEnabled: false }}
-          />
-          <Stack.Screen
-            name='AccountType'
-            component={AccountType}
-            options={{ headerShown: false, animation: 'none' }}
-          />
-          <Stack.Screen
-            name='Credentials'
-            component={Credentials}
-            options={{ headerShown: false, animation: 'none' }}
-          />
-          <Stack.Screen
-            name='FirstWelcome'
-            component={FirstWelcome}
-            options={{ headerShown: false, animation: 'slide_from_bottom' }}
-          />
-        </Stack.Navigator>
+        <Routes/>
       </NavigationContainer>
     </Provider>
 

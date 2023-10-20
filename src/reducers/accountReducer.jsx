@@ -7,7 +7,9 @@ import {
     SET_CPF,
     SET_INSC_ESTADUAL,
     SET_CNPJ,
-    SET_INSC_MUNICIPAL
+    SET_INSC_MUNICIPAL,
+    SET_TOKEN,
+    SET_SIGNED
 } from "./actions";
 
 const initialSTate = {
@@ -19,8 +21,13 @@ const initialSTate = {
     cpf: '',
     cnpj: '',
     inscEstadual: '',
-    inscMunicipal: ''
+    inscMunicipal: '',
+    token: '',
+    refresh: '',
+    signed: false
 }
+
+
 
 function userReducer(state = initialSTate, action) {
     switch (action.type) {
@@ -42,6 +49,10 @@ function userReducer(state = initialSTate, action) {
             return { ...state, inscEstadual: action.payload }
         case SET_CNPJ:
             return { ...state, cnpj: action.payload }
+        case SET_TOKEN:
+            return { ...state, token: action.payload }
+        case SET_SIGNED:
+            return { ...state, signed: action.payload }
         default:
             return state;
     }
