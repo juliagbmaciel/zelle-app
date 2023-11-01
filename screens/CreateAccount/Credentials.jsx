@@ -1,12 +1,13 @@
-import { Image, Text, View, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { Image, Text, View, TextInput, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native'
 import styles from './createAccount.style'
 import React, {  useState } from 'react'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
 import { Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native'
-import { useSelector } from 'react-redux'
-import { axiosInstance } from '../../src/services/api'
+import { useDispatch, useSelector } from 'react-redux'
+import { createClient, createUser, getToken, createPhysicalClient } from '../../src/services/api'
+import { setToken, setSigned, setClientData } from '../../src/reducers/actions'
 
 
 
@@ -15,13 +16,15 @@ const Credentials = ({ navigation }) => {
   const { 
     completeName, socialName, 
     dateOfBirth, accountType, rg, cpf, 
-    cnpj, inscEstadual, inscMunicipal, signed  
+    cnpj, inscEstadual, inscMunicipal, signed, token  
   } = useSelector(state => {
     return state.userReducer
   })
 
-  const [obscureText, setObscureText] = useState(true)
 
+
+  const [obscureText, setObscureText] = useState(true)
+  const dispatch = useDispatch()
 
   const validationSchema = Yup.object().shape({
     password: Yup.string()
@@ -31,27 +34,44 @@ const Credentials = ({ navigation }) => {
 
   const handleSignIn = async (values) => {
     
-
-      console.log('entrei')
-      if (accountType === 'Pessoa Física'){
-          const response = await axiosInstance.post('/auth/users/', {
-            cpf: cpf,
-            password: values.password,
-            username: completeName
-          })
-          console.log(response.data)
-  
-      }
-
-      // console.log(response.data)
-
-      // const infos = await axiosInstance.get('/clients/', {
-      //   headers: {
-      //     'Authorization': `Token ${response.data.auth_token}`
-      //   }
-      // })
-      // console.log(infos.data)
+      try {
+        const user = await createUser(cpf, values.password, completeName);
+        console.log("Usuário criado:", user);
       
+        const tokenData = await getToken(cpf, values.password);
+        dispatch(setToken(tokenData.auth_token));
+        console.log("Token obtido:", token);
+      
+        console.log("Dados:", completeName, socialName, dateOfBirth);
+      
+        const client = await createClient(completeName, socialName, dateOfBirth, tokenData.auth_token);
+        console.log("Cliente criado:", client);
+
+        if(accountType === 'Pessoa Física'){
+          const physicalClient = await createPhysicalClient(rg, tokenData.auth_token)
+          dispatch(setClientData(physicalClient))
+          dispatch(setSigned(true))
+        }else{
+
+        }
+
+      } catch (error) {
+        console.log(error)
+        //  Alert.alert(
+        //         'CPF informado já possui uma conta',
+        //         'Este usuário já existe, faça login nesta conta',
+        //         [
+        //           { text: 'Login', style: 'cancel', onPress: () => {} },
+        //           {
+        //             text: 'Cancelar',
+        //             style: 'destructive',
+        //             onPress: () => {
+                        
+        //             },
+        //           },
+        //         ]
+        //       );
+      }
   }
 
 
@@ -87,7 +107,7 @@ const Credentials = ({ navigation }) => {
                     onFocus={() => { setFieldTouched('password') }}
                     onBlur={() => { setFieldTouched('password', '') }}
                     value={values.password}
-                    color={"#fff"} a
+                    color={"#fff"} 
                     maxLength={15}
                     style={{ height: "100%", width: "85%" }}
                   />
@@ -109,7 +129,7 @@ const Credentials = ({ navigation }) => {
                   <Ionicons name='arrow-back' size={20} />
                   <Text style={{ fontFamily: 'regular' }}>Voltar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPressIn={isValid ? handleSignIn : () => { }} style={isValid ? styles.buttonPrimary : styles.buttonInactive} onPress={() => handleSignIn}>
+                <TouchableOpacity onPressIn={isValid ? () => handleSignIn(values) : () => { }} style={isValid ? styles.buttonPrimary : styles.buttonInactive} onPress={() => handleSignIn}>
                   <Text style={isValid ? { fontFamily: 'regular' } : { color: "#313131" }}>Próximo</Text>
                   <Ionicons style={!isValid && { color: "#313131" }} name='arrow-forward' size={20} />
                 </TouchableOpacity>

@@ -15,7 +15,7 @@ import * as Animatable from 'react-native-animatable'
 import styles from './createAccount.style.jsx'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { useSelector, useDispatch } from 'react-redux'
-import { setCompleteName, setSocialName, resetState } from '../../src/reducers/actions.jsx'
+import { setCompleteName, setSocialName, resetState, setDateOfBirth } from '../../src/reducers/actions.jsx'
 
 
 
@@ -28,7 +28,7 @@ const CreateAccount = ({ navigation }) => {
 
   const [error, setError] = useState('')
   const [errorDate, setErrorDate] = useState('')
-  const [dateOfBirth, setDateOfBirth] = useState('')
+  const [dateOfBirth, setDateBirth] = useState('')
 
 
   const [date, setDate] = useState(new Date())
@@ -44,7 +44,7 @@ const CreateAccount = ({ navigation }) => {
       setDate(currentDate)
       if (Platform.OS === "android") {
         toggleDatePicker()
-        setDateOfBirth(currentDate.toDateString())
+        setDateBirth(currentDate.toDateString())
       }
     } else {
       toggleDatePicker()
@@ -56,7 +56,7 @@ const CreateAccount = ({ navigation }) => {
   }
 
   const confirmIosDate = () => {
-    setDateOfBirth(date.toDateString());
+    setDateBirth(date.toDateString());
     toggleDatePicker()
   }
 
@@ -80,6 +80,14 @@ const CreateAccount = ({ navigation }) => {
       dispatch(setSocialName(socialName))
     }
     dispatch(setCompleteName(completeName))
+    // dispatch(setDateOfBirth(dateOfBirth))
+    const date = new Date(dateOfBirth)
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+    console.log(formattedDate)
+    dispatch(setDateOfBirth(formattedDate))
     setError('')
     setErrorDate('')
     navigation.navigate('AccountType')
@@ -195,13 +203,7 @@ const CreateAccount = ({ navigation }) => {
             </View>
 
           )}
-
-
-
-
         </View>
-
-
       </Animatable.View>
     </View>
     </TouchableWithoutFeedback>

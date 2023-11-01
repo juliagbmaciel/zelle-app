@@ -9,6 +9,8 @@ export const SET_INSC_ESTADUAL = 'SET_INSC_ESTADUAL'
 export const SET_INSC_MUNICIPAL = 'SET_INSC_MUNICIPAL'
 export const SET_TOKEN = 'SET_TOKEN'
 export const SET_SIGNED = 'SET_SIGNED'
+export const SET_DATE_OF_BIRTH = 'SET_DATE_OF_BIRTH'
+export const SET_CLIENT_DATA = 'SET_CLIENT_DATA'
 
 
 
@@ -17,6 +19,13 @@ export const setCompleteName = name => dispatch => {
         type: SET_COMPLETE_NAME, 
         payload: name
     })
+}
+
+export const setDateOfBirth = dateOfBirth => dispatch => {
+  dispatch({
+      type: SET_DATE_OF_BIRTH, 
+      payload: dateOfBirth
+  })
 }
 
 export const setSocialName = name => dispatch => {
@@ -63,7 +72,6 @@ export const setInscEstadual = inscEstadual => dispatch => {
 };
 
 export const setInscMunicipal = inscMunicipal => dispatch => {
-  
   dispatch({
     type: SET_INSC_MUNICIPAL,
     payload: inscMunicipal
@@ -71,7 +79,6 @@ export const setInscMunicipal = inscMunicipal => dispatch => {
 };
 
 export const setToken = token => dispatch => {
-  
   dispatch({
     type: SET_TOKEN,
     payload: token
@@ -80,10 +87,17 @@ export const setToken = token => dispatch => {
 
 
 export const setSigned = signed => dispatch => {
-  
   dispatch({
     type: SET_SIGNED,
     payload: signed
+  });
+};
+
+
+export const setClientData = clientData => dispatch => {
+  dispatch({
+    type: SET_CLIENT_DATA,
+    payload: clientData
   });
 };
 
