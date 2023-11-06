@@ -11,7 +11,8 @@ import {
     SET_TOKEN,
     SET_SIGNED,
     SET_DATE_OF_BIRTH,
-    SET_CLIENT_DATA
+    SET_CLIENT_DATA,
+    SET_ACCOUNT_DATA
 } from "./actions";
 
 const initialSTate = {
@@ -26,8 +27,9 @@ const initialSTate = {
     inscMunicipal: '',
     token: '',
     refresh: '',
-    signed: false,
-    clientData: {}
+    signed: true,
+    clientData: {},
+    accountData: {},
 }
 
 
@@ -57,9 +59,11 @@ function userReducer(state = initialSTate, action) {
         case SET_SIGNED:
             return { ...state, signed: action.payload }
         case SET_DATE_OF_BIRTH:
-            return {...state, dateOfBirth: action.payload}
+            return { ...state, dateOfBirth: action.payload }
         case SET_CLIENT_DATA:
-                return {...state, data: action.payload}
+            return { ...state, clientData: action.payload }
+        case SET_ACCOUNT_DATA:
+            return { ...state, accountData: action.payload }
         default:
             return state;
     }

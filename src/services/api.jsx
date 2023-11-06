@@ -70,3 +70,22 @@ export async function createPhysicalClient(rg, token){
     }
 }
 
+export async function createAccount(token){
+  try {
+      const response = await axiosInstance.post('accounts/', 
+          {type: "Conta Corrente"},
+          {headers: {
+              'Authorization': `Token ${token}`
+          }}   
+      ) 
+      console.log('criando conta')
+      return response.data
+  } catch (error) {
+      console.log("Deu erro")
+      throw error
+  }
+}
+
+
+
+

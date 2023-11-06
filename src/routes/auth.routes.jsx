@@ -2,7 +2,8 @@ import {
     InitialPage,
     CreateAccount,
     AccountType,
-    Credentials
+    Credentials,
+    
 } from '../../screens'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -31,6 +32,7 @@ const AuthRoutes = () => (
             component={Credentials}
             options={{ headerShown: false, animation: 'none' }}
         />
+
     </AuthStack.Navigator>
 )
 

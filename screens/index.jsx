@@ -3,6 +3,7 @@ import CreateAccount from './CreateAccount/index.jsx'
 import AccountType from './CreateAccount/AccountType'
 import Credentials from './CreateAccount/Credentials'
 import FirstWelcome from './Welcome/FirstWelcome'
+import Home from './Home'
 
 
 export {
@@ -10,5 +11,6 @@ export {
     CreateAccount,
     AccountType, 
     Credentials,
-    FirstWelcome
+    FirstWelcome,
+    Home
 }

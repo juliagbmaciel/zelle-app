@@ -1,5 +1,8 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 
+
+const { width } = Dimensions.get('window');
+console.log(width)
 
 
 
@@ -10,8 +13,7 @@ const styles = StyleSheet.create({
     },
     backgroundImage: {
         position: 'relative',
-
-        height: "50%"
+        width: width,
     },
     title:{
         fontFamily: 'medium',

@@ -11,6 +11,7 @@ export const SET_TOKEN = 'SET_TOKEN'
 export const SET_SIGNED = 'SET_SIGNED'
 export const SET_DATE_OF_BIRTH = 'SET_DATE_OF_BIRTH'
 export const SET_CLIENT_DATA = 'SET_CLIENT_DATA'
+export const SET_ACCOUNT_DATA = 'SET_ACCOUNT_DATA'
 
 
 
@@ -98,6 +99,14 @@ export const setClientData = clientData => dispatch => {
   dispatch({
     type: SET_CLIENT_DATA,
     payload: clientData
+  });
+};
+
+export const setAccountData = accountData => dispatch => {
+  console.log(accountData)
+  dispatch({
+    type: SET_ACCOUNT_DATA,
+    payload: accountData
   });
 };
 

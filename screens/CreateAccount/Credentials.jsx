@@ -6,8 +6,8 @@ import { Formik } from 'formik'
 import { Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { createClient, createUser, getToken, createPhysicalClient } from '../../src/services/api'
-import { setToken, setSigned, setClientData } from '../../src/reducers/actions'
+import { createClient, createUser, getToken, createPhysicalClient, createAccount } from '../../src/services/api'
+import { setToken, setSigned, setClientData, setAccountData } from '../../src/reducers/actions'
 
 
 
@@ -47,9 +47,14 @@ const Credentials = ({ navigation }) => {
         const client = await createClient(completeName, socialName, dateOfBirth, tokenData.auth_token);
         console.log("Cliente criado:", client);
 
+        const account = await createAccount(tokenData.auth_token)
+        console.log("Conta criada ", account)
+        dispatch(setAccountData({account}))
+
         if(accountType === 'Pessoa Física'){
           const physicalClient = await createPhysicalClient(rg, tokenData.auth_token)
-          dispatch(setClientData(physicalClient))
+          dispatch(setClientData({physicalClient}))
+          
           dispatch(setSigned(true))
         }else{
 

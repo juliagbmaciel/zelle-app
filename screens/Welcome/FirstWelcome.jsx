@@ -9,13 +9,13 @@ import React, { useEffect } from 'react'
 
 const FirstWelcome = ({ navigation }) => {
 
-    const { completeName } = useSelector(state => {
+    const { completeName, accountData } = useSelector(state => {
         return state.userReducer
     })
     const dispatch = useDispatch()
     const names = completeName.split(' ')
     firstName = names[0]
-    
+    console.log(accountData)
 
     navigation.removeListener('beforeRemove');
 
@@ -49,6 +49,7 @@ const FirstWelcome = ({ navigation }) => {
             <View style={styles.backgroundImage}>
                 <Image
                     source={require("../../assets/img/cardBackground.png")}
+                    style={styles.backgroundImage}
                 />
             </View>
             <View style={styles.contentContainer}>
