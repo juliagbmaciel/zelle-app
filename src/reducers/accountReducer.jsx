@@ -27,7 +27,7 @@ const initialSTate = {
     inscMunicipal: '',
     token: '',
     refresh: '',
-    signed: true,
+    signed: false,
     clientData: {},
     accountData: {},
 }

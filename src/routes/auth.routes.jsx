@@ -3,6 +3,7 @@ import {
     CreateAccount,
     AccountType,
     Credentials,
+    Login
     
 } from '../../screens'
 
@@ -31,6 +32,11 @@ const AuthRoutes = () => (
             name='Credentials'
             component={Credentials}
             options={{ headerShown: false, animation: 'none' }}
+        />
+        <AuthStack.Screen
+            name='Login'
+            component={Login}
+            options={{ headerShown: false, animation: 'fade_from_bottom' }}
         />
 
     </AuthStack.Navigator>

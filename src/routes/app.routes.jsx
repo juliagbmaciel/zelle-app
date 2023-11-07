@@ -1,3 +1,4 @@
+import BottomTabNavigation from '../../navigation/BottomTabNavigation';
 import {
     FirstWelcome,
     Home
@@ -9,11 +10,15 @@ const AppStack = createNativeStackNavigator();
 
 const AppRoutes = () => (
     <AppStack.Navigator>
-
+        <AppStack.Screen
+            name='Bottom Navigation'
+            component={BottomTabNavigation}
+            options={{headerShown: false}}
+        />
         <AppStack.Screen
             name='Home'
             component={Home}
-            options={{ headerShown: false, animation: 'none' }}
+            options={{ headerShown: false, animation: 'fade_from_bottom' }}
         />
         <AppStack.Screen
             name='FirstWelcome'

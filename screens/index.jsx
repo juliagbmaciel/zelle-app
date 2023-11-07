@@ -4,6 +4,7 @@ import AccountType from './CreateAccount/AccountType'
 import Credentials from './CreateAccount/Credentials'
 import FirstWelcome from './Welcome/FirstWelcome'
 import Home from './Home'
+import Login from './Login'
 
 
 export {
@@ -12,5 +13,6 @@ export {
     AccountType, 
     Credentials,
     FirstWelcome,
-    Home
+    Home,
+    Login
 }

@@ -86,6 +86,23 @@ export async function createAccount(token){
   }
 }
 
+export async function getAccount(token){
+  try {
+      const response = await axiosInstance.get('accounts/', 
+          {headers: {
+              'Authorization': `Token ${token}`
+          }}   
+      ) 
+      console.log('pegando conta')
+      console.log(response.data)
+      return response.data
+  } catch (error) {
+      console.log("Deu erro")
+      throw error
+  }
+}
+
+
 
 
 
