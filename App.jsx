@@ -42,7 +42,6 @@ export default function App() {
     return null;
   }
   console.log(Routes)
-
   return (
     <Provider store={Store}>
       <NavigationContainer>

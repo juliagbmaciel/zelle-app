@@ -156,7 +156,7 @@ const AccountType = ({navigation}) => {
               {({ handleChange, handleBlur, handleSubmit, touched, errors, isValid, setFieldTouched, values }) => (
                 <View style={styles.logContent}>
                   {values.cnpj == '' && values.inscEstadual == '' && values.inscMunicipal == '' ? isValid = false : isValid = isValid}
-                  {console.log(isValid)}
+
                   <View>
                     <Input
                       label={"CNPJ"}

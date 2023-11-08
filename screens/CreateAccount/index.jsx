@@ -76,7 +76,6 @@ const CreateAccount = ({ navigation }) => {
       return
     }
     if (socialName !== '') {
-      console.log(socialName)
       dispatch(setSocialName(socialName))
     }
     dispatch(setCompleteName(completeName))

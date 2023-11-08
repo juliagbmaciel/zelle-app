@@ -103,7 +103,7 @@ export const setClientData = clientData => dispatch => {
 };
 
 export const setAccountData = accountData => dispatch => {
-  console.log(accountData)
+
   dispatch({
     type: SET_ACCOUNT_DATA,
     payload: accountData
