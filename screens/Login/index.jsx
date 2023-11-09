@@ -23,7 +23,6 @@ const Login = ({ navigation }) => {
 
     const validationSchema = Yup.object().shape({
         password: Yup.string()
-            .min(8, '*Senha deve conter no mínimo 8 caracteres')
             .required('*Campo brigatório'),
     }, {
         cpf: Yup.string()
@@ -47,10 +46,9 @@ const Login = ({ navigation }) => {
         } catch (error) {
             console.log(error)
             Alert.alert(
-                'Algo deu errado com o login...',
-                'Este usuário já existe, faça login nesta conta',
+                'Ops...',
+                'Email ou senha inválidos...',
                 [
-                    { text: 'Login', style: 'cancel', onPress: () => { } },
                     {
                         text: 'Cancelar',
                         style: 'destructive',

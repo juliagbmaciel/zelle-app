@@ -5,6 +5,7 @@ import Credentials from './CreateAccount/Credentials'
 import FirstWelcome from './Welcome/FirstWelcome'
 import Home from './Home'
 import Login from './Login'
+import Wallet from './Wallet/index.jsx'
 
 
 export {
@@ -14,5 +15,6 @@ export {
     Credentials,
     FirstWelcome,
     Home,
-    Login
+    Login,
+    Wallet
 }

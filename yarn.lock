@@ -1784,6 +1784,11 @@
   dependencies:
     "merge-options" "^3.0.4"
 
+"@react-native-community/blur@^4.3.2":
+  "integrity" "sha512-0ID+pyZKdC4RdgC7HePxUQ6JmsbNrgz03u+6SgqYpmBoK/rE+7JffqIw7IEsfoKitLEcRNLGekIBsfwCqiEkew=="
+  "resolved" "https://registry.npmjs.org/@react-native-community/blur/-/blur-4.3.2.tgz"
+  "version" "4.3.2"
+
 "@react-native-community/cli-clean@11.3.6":
   "integrity" "sha512-jOOaeG5ebSXTHweq1NznVJVAFKtTFWL4lWgUXl845bCGX7t1lL8xQNWHKwT8Oh1pGR2CI3cKmRjY4hBg+pEI9g=="
   "resolved" "https://registry.npmjs.org/@react-native-community/cli-clean/-/cli-clean-11.3.6.tgz"
@@ -7467,6 +7472,11 @@
   "version" "2.0.7"
   dependencies:
     "react-native-snap-carousel" "latest"
+
+"react-native-linear-gradient@^2.8.3":
+  "integrity" "sha512-KflAXZcEg54PXkLyflaSZQ3PJp4uC4whM7nT/Uot9m0e/qxFV3p6uor1983D1YOBJbJN7rrWdqIjq0T42jOJyA=="
+  "resolved" "https://registry.npmjs.org/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz"
+  "version" "2.8.3"
 
 "react-native-modal-datetime-picker@^17.1.0":
   "integrity" "sha512-jfTwfaCLtBffYbQ+pOGFLM+J5HmUh3vb9rT0JrrQPjxzecdc8pNYreB1c96+mVuq8bDCvaCdIeuEsslTqLJL0Q=="

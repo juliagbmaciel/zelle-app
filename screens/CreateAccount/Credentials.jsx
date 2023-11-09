@@ -24,7 +24,6 @@ const Credentials = ({ navigation }) => {
 
 
   const [obscureText, setObscureText] = useState(true)
-  const [tokenData, setTokenData] = useState('')
   const dispatch = useDispatch()
 
   const validationSchema = Yup.object().shape({
@@ -39,62 +38,52 @@ const Credentials = ({ navigation }) => {
       if (accountType === 'Pessoa Física') {
         const user = await createUser(cpf, values.password, completeName);
 
-        console.log("Usuário criado:", user);
-
         const tokenDataApi = await getToken(cpf, values.password);
 
-        setTokenData(tokenDataApi.auth_token)
+        const client = await createClient(completeName, socialName, dateOfBirth, tokenDataApi.auth_token);
+
+        const account = await createAccount(tokenDataApi.auth_token)
+
+        dispatch(setAccountData({ account }))
         dispatch(setToken(tokenDataApi.auth_token));
+
+        const physicalClient = await createPhysicalClient(rg, tokenDataApi.auth_token)
+        dispatch(setClientData({ physicalClient }))
+
+        dispatch(setSigned(true))
 
       } else {
         const user = await createUser(cnpj, values.password, completeName);
 
-        console.log("Usuário criado:", user);
-
         const tokenDataApi = await getToken(cnpj, values.password);
 
-        console.log('token lixo: ', tokenDataApi.auth_token)
-        setTokenData(tokenDataApi.auth_token)
+        const client = await createClient(completeName, socialName, dateOfBirth, tokenDataApi.auth_token);
 
-        dispatch(setToken(tokenData.auth_token));
-      }
+        const account = await createAccount(tokenDataApi.auth_token)
 
+        const legalClient = await createLegalClient(tokenDataApi.auth_token, cnpj, inscEstadual, inscMunicipal )
 
-      const client = await createClient(completeName, socialName, dateOfBirth, tokenData);
-      console.log("Cliente criado:", client);
-
-      const account = await createAccount(tokenData.auth_token)
-      console.log("Conta criada ", account)
-      dispatch(setAccountData({ account }))
-
-      if (accountType === 'Pessoa Física') {
-        const physicalClient = await createPhysicalClient(rg, tokenData.auth_token)
-        dispatch(setClientData({ physicalClient }))
-
-        dispatch(setSigned(true))
-      } else {
-        const legalClient = await createLegalClient(tokenData.auth_token, cnpj, inscEstadual, inscMunicipal )
+        dispatch(setAccountData({ account }))
+        dispatch(setToken(tokenDataApi.auth_token));
         dispatch(setClientData({ legalClient }))
-
         dispatch(setSigned(true))
       }
 
     } catch (error) {
       console.log(error)
-      //  Alert.alert(
-      //         'CPF informado já possui uma conta',
-      //         'Este usuário já existe, faça login nesta conta',
-      //         [
-      //           { text: 'Login', style: 'cancel', onPress: () => {} },
-      //           {
-      //             text: 'Cancelar',
-      //             style: 'destructive',
-      //             onPress: () => {
+       Alert.alert(
+              'Ops!',
+              'Algo deu errado com a criação da conta',
+              [
+                {
+                  text: 'Cancelar',
+                  style: 'destructive',
+                  onPress: () => {
 
-      //             },
-      //           },
-      //         ]
-      //       );
+                  },
+                },
+              ]
+            );
     }
   }
 

@@ -45,7 +45,7 @@ const Home = () => {
         };
 
         fetchData();
-    }, [hideBalance]);
+    }, []);
 
     function setBalance() {
         const balance = accountDataApi.data.account.balance
@@ -92,11 +92,11 @@ const Home = () => {
                 <View style={styles.main}>
                     <Text style={styles.title}>Operações</Text>
                     <View style={styles.row}>
-                        <View style={styles.card}>
+                        <TouchableOpacity style={styles.card}>
                             <FontAwesome name='exchange' color={"#fff"} size={20} />
                             <Text style={styles.cardLetter}>Transferência</Text>
-                        </View>
-                        <View style={styles.card}>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.card}>
                             <FontAwesome name='money' color={"#fff"} size={20} />
                             <Text style={styles.cardLetter}>
                                 Solicitar
@@ -104,23 +104,23 @@ const Home = () => {
                             <Text style={styles.cardLetter}>
                                 empréstimo
                             </Text>
-                        </View>
-                        <View style={styles.card}>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.card}>
                             <SimpleLineIcons name='graph' color={"#fff"} size={20} />
                             <Text style={styles.cardLetter}>
                                 Investir
                             </Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                     <View>
-                        <View style={styles.rowCard}>
+                        <TouchableOpacity style={styles.rowCard}>
                             <FontAwesome name='money' color={"#fff"} size={20} />
                             <Text style={styles.cardLetter}>Depositar dinheiro</Text>
-                        </View>
-                        <View style={styles.rowCard}>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.rowCard}>
                             <Ionicons name='card-outline' color={"#fff"} size={20} />
                             <Text style={styles.cardLetter}>Meus cartões</Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                     <View>
                         <View style={styles.cardSecondary}>
