@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { getToken } from '../../src/services/api'
-import { setToken, setSigned } from '../../src/reducers/actions'
+import { setToken, setSigned, setAccountData } from '../../src/reducers/actions'
 
 
 
@@ -39,10 +39,6 @@ const Login = ({ navigation }) => {
                 dispatch(setToken(tokenData.auth_token));
                 dispatch(setSigned(true))
             }
-            
-
-
-
         } catch (error) {
             console.log(error)
             Alert.alert(
