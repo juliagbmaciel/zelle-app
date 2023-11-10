@@ -5,7 +5,11 @@ import mastercardLogo from '../../assets/img/mastercard_logo.png'
 
 
 
-const Card = ({ banner, name, number, date }) => {
+const Card = ({props}) => {
+    console.log("propssssssssss: ", props.item.limit)
+    const number = props.item.number;
+    const limit = parseFloat(props.item.limit);
+    const limitFormatted = limit.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
     return (
         <View style={style.cardContainer}>
             <View style={style.blobOne} />
@@ -13,11 +17,11 @@ const Card = ({ banner, name, number, date }) => {
             <Image source={mastercardLogo} style={style.logo} />
             <View style={style.content}>
                 <View>
-                    <Text style={style.label}>Saldo atual</Text>
-                    <Text style={style.balance}>R$ 1.000,00</Text>
+                    <Text style={style.label}>Limite Total</Text>
+                    <Text style={style.balance}>{limitFormatted}</Text>
                 </View>
                 <View style={style.flexBetween}>
-                    <Text style={style.labelN}>123 123 123 123</Text>
+                    <Text style={style.labelN}>{number}</Text>
                     <Text style={style.labelN}>9/25</Text>
                 </View>
             </View>
