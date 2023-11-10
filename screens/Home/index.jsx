@@ -4,11 +4,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
     Ionicons, FontAwesome, SimpleLineIcons
 } from '@expo/vector-icons'
-import * as Animatable from 'react-native-animatable'
 import styles from './styles.jsx'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Svg, { Path, Rect } from 'react-native-svg';
 import { getAccount } from '../../src/services/api.jsx'
+import { setAccountData } from '../../src/reducers/actions.jsx'
 
 const Home = () => {
 
@@ -18,25 +18,28 @@ const Home = () => {
     })
     const [hideBalance, setHideBalance] = useState(false);
 
-    const [accountDataApi, setAccountData] = useState({
+    const [accountDataApi, setAccountDataApi] = useState({
         data: null,
         loading: true,
         error: null,
     });
+
+    const dispatch = useDispatch()
     useEffect(() => {
         const fetchData = async () => {
-            setAccountData((prevState) => ({ ...prevState, loading: true }));
+            setAccountDataApi((prevState) => ({ ...prevState, loading: true }));
 
             try {
                 const account = await getAccount(token);
-                setAccountData({
+                setAccountDataApi({
                     data: account,
                     loading: false,
                     error: null,
                 });
+                dispatch(setAccountData(account))
 
             } catch (error) {
-                setAccountData({
+                setAccountDataApi({
                     data: null,
                     loading: false,
                     error: "Erro ao buscar os dados da conta.",
