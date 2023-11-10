@@ -133,6 +133,46 @@ export async function getAccount(token) {
 }
 
 
+export async function createCard(token) {
+  console.log('aa');
+  console.log(token);
+  
+  try {
+    const response = await axiosInstance.post(
+      'cards/',
+      {},
+      {
+        headers: {
+          'Authorization': `Token ${token}`
+        }
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log("Deu erro");
+    throw error;
+  }
+}
+
+export async function getCards(token, accountId) {
+  try {
+    const response = await axiosInstance.get(`cards?account=${accountId}`,
+      {
+        headers: {
+          'Authorization': `Token ${token}`
+        }
+      }
+    )
+    console.log(response.data)
+    return response.data
+  } catch (error) {
+    console.log("Erro ao buscar cartões")
+    throw error
+  }
+}
+
+
 
 
 
