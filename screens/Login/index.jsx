@@ -12,12 +12,6 @@ import { setToken, setSigned, setAccountData } from '../../src/reducers/actions'
 
 
 const Login = ({ navigation }) => {
-
-
-
-
-
-
     const [obscureText, setObscureText] = useState(true)
     const dispatch = useDispatch()
 

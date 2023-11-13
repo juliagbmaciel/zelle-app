@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
     label: {
         color: "#fff",
         fontFamily: 'regular',
-        fontSize: 16
+        fontSize: 18,
+        textAlign: 'center'
     },
     button: {
         backgroundColor: '#D3FE57',
@@ -41,6 +42,42 @@ const styles = StyleSheet.create({
         fontFamily: 'semibold',
         fontSize: 16
     },
+    logoArea: {
+        display: 'flex',
+        alignItems: 'flex-end',
+        marginTop: 40,
+        
+    },
+    title: {
+        fontSize: 19,
+        fontFamily: 'regular',
+        color: "#fff",
+        paddingVertical: 20
+    },
+    cardCreate: {
+        backgroundColor: "#3C3C3C",
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 30,
+        borderRadius: 15
+    },
+    more: {
+        color: "#ccc",
+        fontSize: 20,
+        fontFamily: 'regular'
+    },
+    paymentComponent: {
+        backgroundColor: "#000",
+        borderRadius: 13,
+        paddingHorizontal: 15,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    labelComponent: {
+        fontSize: 13,
+        color: '#fff'
+    }
 
 
 })

@@ -2,7 +2,7 @@ import InitialPage from './InitialPage'
 import CreateAccount from './CreateAccount/index.jsx'
 import AccountType from './CreateAccount/AccountType'
 import Credentials from './CreateAccount/Credentials'
-import FirstWelcome from './Welcome/FirstWelcome'
+import CreateCard from './CreateCard'
 import Home from './Home'
 import Login from './Login'
 import Wallet from './Wallet/index.jsx'
@@ -13,7 +13,7 @@ export {
     CreateAccount,
     AccountType, 
     Credentials,
-    FirstWelcome,
+    CreateCard,
     Home,
     Login,
     Wallet

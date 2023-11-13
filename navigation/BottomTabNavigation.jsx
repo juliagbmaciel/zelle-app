@@ -28,7 +28,6 @@ const screenOptions = {
         backgroundColor: "#000",
         borderWidth: 1,
         borderColor: "#000",
-        // paddingHorizontal: 10,
         paddingLeft: 25,
         justifyContent: 'center'
     }

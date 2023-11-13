@@ -1,6 +1,6 @@
 import BottomTabNavigation from '../../navigation/BottomTabNavigation';
 import {
-    FirstWelcome,
+    CreateCard,
     Home
 } from '../../screens'
 
@@ -13,20 +13,19 @@ const AppRoutes = () => (
         <AppStack.Screen
             name='Bottom Navigation'
             component={BottomTabNavigation}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
         />
+
         <AppStack.Screen
             name='Home'
             component={Home}
             options={{ headerShown: false, animation: 'fade_from_bottom' }}
         />
         <AppStack.Screen
-            name='FirstWelcome'
-            component={FirstWelcome}
+            name='CreateCard'
+            component={CreateCard}
             options={{ headerShown: false, animation: 'slide_from_right' }}
         />
-
-
     </AppStack.Navigator>
 )
 

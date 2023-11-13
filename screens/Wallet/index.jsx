@@ -1,4 +1,13 @@
-import { FlatList, Text, View, ActivityIndicator, TouchableOpacity } from 'react-native'
+import {
+    FlatList,
+    Text,
+    View,
+    ActivityIndicator,
+    TouchableOpacity,
+    Image,
+    Dimensions,
+    Switch
+} from 'react-native'
 import React, { useState } from 'react'
 import styles from './style'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -8,27 +17,26 @@ import { createCard, getCards } from '../../src/services/api'
 import { useEffect } from 'react'
 
 
-const Wallet = () => {
-    const data = [
-        { id: 1, name: 'lalal' },
-        { id: 2, name: 'lalal' },
-        { id: 3, name: 'lalal' }
-    ]
+const Wallet = ({ navigation }) => {
+
 
     const { token, accountData } = useSelector(state => {
         return state.userReducer
     })
+
+
     const [cardData, setCardData] = useState({
         data: null,
         loading: true,
         error: null,
     })
 
-    const [isCardClicked, setIsCardClicked] = useState('')
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [listSize, setListSize] = useState(0)
+    const [active, setActive] = useState(true)
 
     const createCardFunc = async () => {
-        console.log(accountData.account.id);
-        setIsCardClicked('clicked')
+
         try {
             const card = await createCard(token);
             console.log("Card: ", card);
@@ -37,6 +45,14 @@ const Wallet = () => {
         }
         fetchData()
     };
+
+    const createList = (size) => {
+        return Array.from({ length: size }, () => 1);
+    }
+
+    const paginator = createList(listSize)
+
+    const screenWidth = Dimensions.get('window').width;
 
     const fetchData = async () => {
         setCardData((prevState) => ({ ...prevState, loading: true }));
@@ -48,6 +64,7 @@ const Wallet = () => {
                 loading: false,
                 error: null,
             });
+            setListSize(cards.length)
 
         } catch (error) {
             setCardData({
@@ -67,7 +84,12 @@ const Wallet = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text onPress={() => createCardFunc()}>Wallet</Text>
+            <View style={styles.logoArea}>
+                <Image
+                    source={require('../../assets/img/logo.png')}
+                />
+            </View>
+            <Text style={styles.title}>Meus cartões</Text>
             {cardData.loading ? (
                 <View style={styles.noCardContainer}>
                     <ActivityIndicator size={60} color={"#D3FE57"} />
@@ -76,24 +98,62 @@ const Wallet = () => {
                 <View>
                     <View style={styles.noCardContainer}>
                         <Text style={styles.label}> Você ainda não possui cartões!</Text>
-                        <TouchableOpacity style={styles.button} onPress={() => createCardFunc()}>
-                            <Text style={styles.labelButton}>Solicitar Cartão de Crédito</Text>
-                        </TouchableOpacity>
                     </View>
                 </View>
             ) : (
-                <FlatList
-                    data={cardData.data}
-                    style={styles.cardList}
-                    renderItem={(item) => <Card props={item} />}
-                    contentContainerStyle={{ columnGap: 20 }}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    pagingEnabled
-                    snapToAlignment={'center'}
-                    bounces={false}
-                />
+                <View style={{ alignItems: 'center', gap: 20 }}>
+
+                    <FlatList
+                        data={cardData.data}
+                        style={styles.cardList}
+                        renderItem={(item) => <Card props={item} />}
+                        contentContainerStyle={{ columnGap: 20 }}
+                        horizontal
+                        onScroll={e => {
+                            setCurrentIndex((e.nativeEvent.contentOffset.x / screenWidth).toFixed(0))
+                        }}
+                        showsHorizontalScrollIndicator={false}
+                        pagingEnabled
+                        snapToAlignment={'center'}
+                        bounces={false}
+                    />
+                    <View style={{ flexDirection: 'row', gap: 10 }}>
+                        {paginator.map((item, index) => {
+                            return (
+                                <View key={index} style={{ backgroundColor: currentIndex == index ? "#D3FE58" : "#4C5827", width: 8, height: 8, borderRadius: 20 }}>
+                                </View>
+                            );
+                        })}
+                    </View>
+                </View>
+
+
+
             )}
+            <View>
+                <Text style={styles.title}>Solicitar cartão</Text>
+            </View>
+            <TouchableOpacity style={styles.cardCreate} onPress={() => navigation.navigate('CreateCard')}>
+                <Text style={styles.more}>+</Text>
+            </TouchableOpacity>
+
+            {!cardData.loading && cardData.data.length > 0 &&
+                <View>
+                    <Text style={styles.title}>Configurações</Text>
+                    <View style={styles.paymentComponent}>
+                        <Text style={styles.labelComponent}>Pagamento por aproximação</Text>
+                        <Switch
+                            value={active}
+                            trackColor={{ true: '#3DBE59', false: '#ABABAB' }}
+                            thumbColor={active ? '#fff' : "#fff"}
+                            onValueChange={() => setActive(!active)}
+                        />
+                    </View>
+                </View>
+
+            }
+
+
         </SafeAreaView>
     )
 }

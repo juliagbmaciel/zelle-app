@@ -164,7 +164,6 @@ export async function getCards(token, accountId) {
         }
       }
     )
-    console.log(response.data)
     return response.data
   } catch (error) {
     console.log("Erro ao buscar cartões")

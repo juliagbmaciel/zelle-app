@@ -3,13 +3,17 @@ import React from 'react'
 import styles from './cardModalStyle'
 
 
-const CardModal = ({ }) => {
+const CardModal = ({ isVisible }) => {
     return (
         <View>
             <Modal
                 animationType='slide'
+                transparent={true}
+                visible={true}
             >
-
+                <View style={styles.modal}>
+                    <Text>Olaa mundo</Text>
+                </View>
             </Modal>
         </View>
     )
