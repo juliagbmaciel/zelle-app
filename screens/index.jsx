@@ -6,6 +6,8 @@ import CreateCard from './CreateCard'
 import Home from './Home'
 import Login from './Login'
 import Wallet from './Wallet/index.jsx'
+import CardCreated from './CardCreated/index.jsx'
+import Settings from './Settings/index.jsx'
 
 
 export {
@@ -16,5 +18,7 @@ export {
     CreateCard,
     Home,
     Login,
-    Wallet
+    Wallet,
+    CardCreated,
+    Settings
 }

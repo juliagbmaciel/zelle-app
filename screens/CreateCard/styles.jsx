@@ -22,14 +22,19 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     contentContainer:{
+
         padding: 30,
-        gap: 20
+        justifyContent: 'space-around',
+        flex: 2
     },
     subtitle:{
         fontFamily: 'regular',
         color:'#959594',
         textAlign: 'center',
         fontSize: 17
+    },
+    gap: {
+        gap: 20
     }
 
 

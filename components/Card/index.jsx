@@ -7,7 +7,7 @@ import PressableButton from '../Buttons'
 
 
 
-const Card = ({props}) => {
+const Card = ({props, seeBill}) => {
     const number = props.item.number;
     
     const limit = parseFloat(props.item.limit);
@@ -27,7 +27,7 @@ const Card = ({props}) => {
                 <View>
                     <Text style={style.label}>Limite Total</Text>
                     <Text style={style.balance}>{limitFormatted}</Text>
-                    <PressableButton  bgColor={'#000'} radius={'10px'} title={"Ver fatura"} colorTitle={'#D3FE57'} />
+                   {seeBill && <PressableButton  bgColor={'#000'} radius={'10px'} title={"Ver fatura"} colorTitle={'#D3FE57'} />}
                 </View>
                 
                 <View style={style.flexBetween}>
