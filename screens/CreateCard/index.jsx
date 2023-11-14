@@ -1,15 +1,28 @@
 import { Text, View, Image, Alert, BackHandler } from 'react-native'
 import PressableButton from '../../components/Buttons'
-import { CommonActions } from '@react-navigation/native';
+import { createCard, getCards } from '../../src/services/api'
 import styles from './styles'
-
-import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux';
 
 
 const CreateCard = ({ navigation }) => {
 
+    const { token } = useSelector(state => {
+        return state.userReducer
+    })
 
+    const createCardFunc = async () => {
 
+        try {
+            const card = await createCard(token);
+            console.log("Card: ", card);
+            navigation.navigate('CardCreated', {card})
+
+        } catch (error) {
+            console.error("Erro ao criar o cartão: ", error);
+        }
+        
+    };
 
 
     return (
@@ -21,16 +34,12 @@ const CreateCard = ({ navigation }) => {
                 />
             </View>
             <View style={styles.contentContainer}>
-                <Text style={styles.title}>Olá, seja bem vindo(a) ao Zelle Bank!</Text>
-                <Text style={styles.subtitle}>Entre agora em sua conta! Estamos aqui para melhor atendê-lo(a), obrigado por escolher a Zelle!</Text>
-                <PressableButton title={'Entrar'} bgColor={'#D3FE57'} marginTop={'50px'} onPress={() => navigation.goBack()} />
-                <PressableButton title={'Entrar'} bgColor={'#D3FE57'} marginTop={'50px'} onPress={() => navigation.dispatch(CommonActions.reset({
-                    index: 0,
-                    routes: [
-                        { name: 'Bottom Navigation' },
-                        { name: 'Home' },
-                    ],
-                }))} />
+                <View style={styles.gap}>
+                    <Text style={styles.title}>Solicitar cartão de crédito</Text>
+                    <Text style={styles.subtitle}>Tenha um cartão de crédito sem anuidade e pague as suas compras após um mês, ou parcele-as</Text>
+                </View>
+
+                <PressableButton title={'Pedir cartão'} bgColor={'#D3FE57'} marginTop={'10px'} onPress={() => createCardFunc()} />
             </View>
 
         </View>
