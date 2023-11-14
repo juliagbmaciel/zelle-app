@@ -1,7 +1,8 @@
 import BottomTabNavigation from '../../navigation/BottomTabNavigation';
 import {
     CreateCard,
-    Home
+    Home,
+    CardCreated
 } from '../../screens'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -13,9 +14,8 @@ const AppRoutes = () => (
         <AppStack.Screen
             name='Bottom Navigation'
             component={BottomTabNavigation}
-            options={{ headerShown: false }}
+            options={{ headerShown: false, animation: 'fade_from_bottom' }}
         />
-
         <AppStack.Screen
             name='Home'
             component={Home}
@@ -24,7 +24,12 @@ const AppRoutes = () => (
         <AppStack.Screen
             name='CreateCard'
             component={CreateCard}
-            options={{ headerShown: false, animation: 'slide_from_right' }}
+            options={{ headerShown: false, animation: 'fade_from_bottom' }}
+        />
+        <AppStack.Screen
+            name='CardCreated'
+            component={CardCreated}
+            options={{ headerShown: false, animation: 'fade_from_bottom' }}
         />
     </AppStack.Navigator>
 )
