@@ -106,7 +106,7 @@ const Wallet = ({ navigation }) => {
                     <FlatList
                         data={cardData.data}
                         style={styles.cardList}
-                        renderItem={(item) => <Card props={item} />}
+                        renderItem={(item) => <Card props={item} seeBill={true}/>}
                         contentContainerStyle={{ columnGap: 20 }}
                         horizontal
                         onScroll={e => {
