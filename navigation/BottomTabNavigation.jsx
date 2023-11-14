@@ -2,7 +2,7 @@ import { Dimensions } from 'react-native'
 import React from 'react'
 import { AntDesign } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home, Wallet } from '../screens'
+import { Home, Wallet, Settings } from '../screens'
 import HomeTabIcon from './HomeTabIcon';
 import CustomTabIcon from './CustomTabIcon';
 
@@ -29,7 +29,8 @@ const screenOptions = {
         borderWidth: 1,
         borderColor: "#000",
         paddingLeft: 25,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        zIndex: 3
     }
 }
 
@@ -43,7 +44,7 @@ const BottomTabNavigation = () => {
             <Tab.Screen name="Wallet" component={Wallet} options={{
                 tabBarIcon: ({ focused }) => <CustomTabIcon focused={focused} type={'wallet'} />
             }} />
-            <Tab.Screen name="Settings" component={Home} options={{
+            <Tab.Screen name="Settings" component={Settings} options={{
                 tabBarIcon: ({ focused }) => <CustomTabIcon focused={focused} type={'settings'} />
             }} />
             <Tab.Screen name="Profile" component={Home} options={{
