@@ -75,10 +75,11 @@ export async function createPhysicalClient(rg, token) {
   }
 }
 
-export async function createLegalClient(token,cnpj, inscEstadual, inscMunicipal, ) {
+export async function createLegalClient(token, cnpj, inscEstadual, inscMunicipal,) {
   try {
     const response = await axiosInstance.post('client-legal/',
-      { state_registration: inscEstadual,
+      {
+        state_registration: inscEstadual,
         municipal_registration: inscMunicipal,
         cnpj: cnpj
       },
@@ -136,7 +137,7 @@ export async function getAccount(token) {
 export async function createCard(token) {
   console.log('aa');
   console.log(token);
-  
+
   try {
     const response = await axiosInstance.post(
       'cards/',
@@ -167,6 +168,26 @@ export async function getCards(token, accountId) {
     return response.data
   } catch (error) {
     console.log("Erro ao buscar cartões")
+    throw error
+  }
+}
+
+export async function updateClient(token, field, value) {
+  try {
+    if (field === 'name') {
+      console.log('hiii')
+      const response = await axiosInstance.patch('clients/id/',
+        { name: value },
+        {
+          headers: {
+            'Authorization': `Token ${token}`
+          }
+        }
+      )
+      return response.data
+    }
+  } catch (error) {
+    console.log("Erro ao atualizar cliente AA")
     throw error
   }
 }

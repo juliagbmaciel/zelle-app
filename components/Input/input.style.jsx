@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     label: {
-        fontFamily: 'semibold',
-        fontSize: 13.44,
+        fontFamily: 'regular',
+        fontSize: 16,
         color: "#A4A4A3",
     },
 })

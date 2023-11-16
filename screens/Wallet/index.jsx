@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import React, { useState } from 'react'
 import styles from './style'
+import defaultStyle from '../../src/defaultStyle/style.jsx'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Card from '../../components/Card'
 import { useSelector } from 'react-redux'
@@ -83,8 +84,8 @@ const Wallet = ({ navigation }) => {
 
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.logoArea}>
+        <SafeAreaView style={defaultStyle.container}>
+            <View style={defaultStyle.logoArea}>
                 <Image
                     source={require('../../assets/img/logo.png')}
                 />

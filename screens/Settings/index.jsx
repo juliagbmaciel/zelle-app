@@ -2,6 +2,7 @@ import { View, Text, SafeAreaView, Image } from 'react-native'
 import SettingsRow from '../../components/SettingsRow'
 import { Ionicons } from '@expo/vector-icons'
 import styles from './styles'
+import defaultSyle from  '../../src/defaultStyle/style'
 import { useSelector } from 'react-redux'
 
 export default function Settings() {
@@ -15,7 +16,7 @@ export default function Settings() {
 
 
     const dataRows = [
-        { title: "Nome de preferência" },
+        { title: "Nome de preferência"},
         { title: "Contato" },
         { title: "Alterar foto de perfil" },
         { title: "Adicionar endereço" },
@@ -23,9 +24,11 @@ export default function Settings() {
         { title: "Me ajuda" }
     ]
 
+
+
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.logoArea}>
+        <SafeAreaView style={defaultSyle.container}>
+            <View style={defaultSyle.logoArea}>
                 <Image
                     source={require('../../assets/img/logo.png')}
                 />
@@ -40,7 +43,7 @@ export default function Settings() {
                 </View>
 
             </View>
-            <View>
+            <View style={styles.mTop}>
                 {dataRows.map((item, index) => {
                     return <SettingsRow title={item.title} key={index}/>
                 })}

@@ -1,14 +1,17 @@
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import styles from './styles'
 import React from 'react'
 import {Ionicons} from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function SettingsRow({title}) {
-    console.log(title)
+
+    const navigation = useNavigation()
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('SettingPage', title)}>
             <Text style={styles.label}>{title}</Text>
             <Ionicons name='chevron-forward' color={'#ccc'} size={15}/>
-        </View>
+        </TouchableOpacity>
     )
 }

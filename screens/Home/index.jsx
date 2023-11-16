@@ -9,6 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import Svg, { Path, Rect } from 'react-native-svg';
 import { getAccount } from '../../src/services/api.jsx'
 import { setAccountData } from '../../src/reducers/actions.jsx'
+import defaultStyle from '../../src/defaultStyle/style.jsx'
 
 const Home = () => {
 
@@ -68,8 +69,8 @@ const Home = () => {
             </View>
 
         ) : (
-            <SafeAreaView style={styles.container}>
-                <View style={styles.logoArea}>
+            <SafeAreaView style={defaultStyle.container}>
+                <View style={defaultStyle.logoArea}>
                     <Image
                         source={require('../../assets/img/logo.png')}
                     />

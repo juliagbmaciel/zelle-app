@@ -4,19 +4,6 @@ const screenWidth = Dimensions.get('window').width;
 
 
 const styles = StyleSheet.create({
-    logoArea: {
-        display: 'flex',
-        alignItems: 'flex-end',
-        marginTop: 40,
-        
-    },
-    container: {
-        flex: 1,
-        backgroundColor: "#171715",
-        paddingHorizontal: 20,
-        fontFamily: 'regular',
-        color: "#fff"
-    },
     iconProfile: {
         backgroundColor: "#505050",
         width: 42,
