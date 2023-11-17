@@ -187,7 +187,65 @@ export async function updateClient(token, field, value) {
       return response.data
     }
   } catch (error) {
-    console.log("Erro ao atualizar cliente AA")
+    console.log("Erro ao atualizar cliente")
+    throw error
+  }
+}
+
+export async function getContacts(token) {
+  try {
+    console.log('pegando contato')
+    const response = await axiosInstance.get('contacts/',
+      {
+        headers: {
+          'Authorization': `Token ${token}`
+        }
+      }
+    )
+    return response.data
+
+
+  } catch (error) {
+    console.log("Erro ao pegar contatos aqui")
+    throw error
+  }
+}
+
+export async function createContact(token, number, email) {
+  try {
+    const response = await axiosInstance.post('contacts/',
+      {
+        number: number,
+        email: email
+      },
+      {
+        headers: {
+          'Authorization': `Token ${token}`
+        }
+      }
+    )
+    return response.data
+
+  } catch (error) {
+    console.log("Erro ao criar novo contato")
+    throw error
+  }
+}
+
+export async function sendPicture(token, formData) {
+  try {
+    const response = await axiosInstance.patch('clients/id/',
+      { picture: formData },
+      {
+        headers: {
+          'Authorization': `Token ${token}`
+        }
+      }
+    )
+    return response.data
+
+  } catch (error) {
+    console.log("Erro ao atualizar imagem do cliente")
     throw error
   }
 }
