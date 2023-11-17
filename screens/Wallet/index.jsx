@@ -36,17 +36,6 @@ const Wallet = ({ navigation }) => {
     const [listSize, setListSize] = useState(0)
     const [active, setActive] = useState(true)
 
-    const createCardFunc = async () => {
-
-        try {
-            const card = await createCard(token);
-            console.log("Card: ", card);
-        } catch (error) {
-            console.error("Erro ao criar o cartão: ", error);
-        }
-        fetchData()
-    };
-
     const createList = (size) => {
         return Array.from({ length: size }, () => 1);
     }
