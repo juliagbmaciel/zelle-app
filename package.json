@@ -20,6 +20,7 @@
     "axios": "^1.4.0",
     "expo": "~49.0.10",
     "expo-font": "~11.4.0",
+    "expo-image-picker": "^14.5.0",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "formik": "^2.4.5",

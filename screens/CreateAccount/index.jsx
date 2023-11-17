@@ -79,7 +79,6 @@ const CreateAccount = ({ navigation }) => {
       dispatch(setSocialName(socialName))
     }
     dispatch(setCompleteName(completeName))
-    // dispatch(setDateOfBirth(dateOfBirth))
     const date = new Date(dateOfBirth)
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');

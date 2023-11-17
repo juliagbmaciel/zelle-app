@@ -21,6 +21,20 @@ const styles = StyleSheet.create({
     },
     nameContainer:{
         gap: 30
+    },
+    iconProfile: {
+        backgroundColor: "#505050",
+        width: 200,
+        height: 200,
+        borderRadius: 100,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    img: {
+        width: 200,
+        height: 200,
+        borderRadius: 100
     }
 })
 
