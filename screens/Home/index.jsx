@@ -18,7 +18,7 @@ const Home = () => {
         return state.userReducer
     })
     const [hideBalance, setHideBalance] = useState(false);
-
+    const [imageUri, setImageUri] = useState('')
     const [accountDataApi, setAccountDataApi] = useState({
         data: null,
         loading: true,
@@ -38,6 +38,7 @@ const Home = () => {
                     error: null,
                 });
                 dispatch(setAccountData(account))
+
 
             } catch (error) {
                 setAccountDataApi({
@@ -70,15 +71,24 @@ const Home = () => {
 
         ) : (
             <SafeAreaView style={defaultStyle.container}>
+                {console.log(accountDataApi.data.client.client.picture)}
+                {/* <Image source={{uri: accountDataApi.data.client.client.picture}} style={{width: 200, height: 200}}/> */}
                 <View style={defaultStyle.logoArea}>
                     <Image
                         source={require('../../assets/img/logo.png')}
                     />
                 </View>
+
                 <View style={styles.header}>
-                    <View style={styles.iconProfile}>
-                        <Ionicons name='person-outline' size={18} color={"#A2A2A2"} />
-                    </View>
+                    {console.log(accountDataApi.data.client.client.picture)}
+                    {accountDataApi.data.client.client.picture === null ? (
+                        <View style={styles.iconProfile}>
+                            <Ionicons name='person-outline' size={18} color={"#A2A2A2"} />
+                        </View>
+                    ) : (
+                        <Image source={{uri: `http://192.168.0.144:8000${accountDataApi.data.client.client.picture}`}} style={styles.iconProfile}/>
+                        )}
+
                     <View>
                         <Text style={styles.subTitle}>Olá,</Text>
                         <Text style={styles.name}>{accountDataApi.data.client.client.name}</Text>
