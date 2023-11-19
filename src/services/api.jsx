@@ -235,10 +235,11 @@ export async function createContact(token, number, email) {
 export async function sendPicture(token, formData) {
   try {
     const response = await axiosInstance.patch('clients/id/',
-      { picture: formData },
+        formData,
       {
         headers: {
-          'Authorization': `Token ${token}`
+          'Authorization': `Token ${token}`,
+          'Content-Type': 'multipart/form-data'
         }
       }
     )
