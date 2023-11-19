@@ -164,19 +164,30 @@ export default function SettingPage({ route }) {
     }
 
     const sendImageFunc = async () => {
-        console.log(image)
         const formData = new FormData();
-    
+        if(image === ''){
+            Alert.alert(
+                '',
+                'Escolha uma imagem para atualizar!',
+                [
+                    {
+                        text: 'OK',
+                        style: 'destructive',
+                        onPress: () => { },
+                    },
+                ]
+            );
+            return
+        }
         formData.append('picture', {
             uri: image,
-            name: 'nome_da_imagem.jpg',
-            type: 'image/jpeg',
+            type: 'image/jpeg', 
+            name: 'profile.jpg',
         });
-    
         try {
             console.log(formData)
             const response = await sendPicture(token, formData)
-            console.log(response.data);
+            createAlert("Foto de perfil atualizada com sucesso!")
         } catch (error) {
             console.error('Erro ao criar instância do modelo comm', error);
         }
@@ -236,19 +247,18 @@ export default function SettingPage({ route }) {
 
             {title === 'Alterar foto de perfil' && (
                 <View style={{ alignItems: 'center' }}>
-                    {accountData.client.client.picture === null && image === '' && (
+                    {accountData.client.client.picture === null && image === '' ? (
                         <View style={styles.iconProfile}>
                             <Ionicons name='person-outline' size={60} color={"#A2A2A2"} />
                         </View>
+                    ) : (
+                        <Image source={{ uri: `http://192.168.0.144:8000${accountData.client.client.picture}`}} style={styles.iconProfile}/>
                     )}
                     {image !== '' && (
                         <Image source={{ uri: image }} style={styles.img} />
                     )}
-                    
-                    
                      <PressableButton bgColor={'#D3FE57'} marginTop={'70px'} title={'Escolher Foto'} onPress={gallery} />
                     <PressableButton bgColor={'#D3FE57'} title={'Confirmar'} onPress={sendImageFunc}/>
-
                 </View>
             )}
         </View>
