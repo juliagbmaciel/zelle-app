@@ -9,6 +9,7 @@ import Wallet from './Wallet/index.jsx'
 import CardCreated from './CardCreated/index.jsx'
 import Settings from './Settings/index.jsx'
 import SettingPage from './SettingPage/index.jsx'
+import Transfer from './Transfer/index.jsx'
 
 
 export {
@@ -22,5 +23,6 @@ export {
     Wallet,
     CardCreated,
     Settings,
-    SettingPage
+    SettingPage,
+    Transfer
 }
