@@ -70,7 +70,6 @@ const Credentials = ({ navigation }) => {
       }
 
     } catch (error) {
-      console.log(error)
        Alert.alert(
               'Ops!',
               'Algo deu errado com a criação da conta',

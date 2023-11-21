@@ -15,7 +15,6 @@ const CreateCard = ({ navigation }) => {
 
         try {
             const card = await createCard(token);
-            console.log("Card: ", card);
             navigation.navigate('CardCreated', {card})
 
         } catch (error) {

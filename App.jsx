@@ -41,7 +41,6 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
-  console.log(Routes)
   return (
     <Provider store={Store}>
       <NavigationContainer>

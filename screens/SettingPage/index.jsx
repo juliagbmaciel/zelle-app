@@ -42,7 +42,6 @@ export default function SettingPage({ route }) {
     const updateField = async (field, value) => {
         try {
             const client = await updateClient(token, field, value);
-            console.log("Client: ", client);
         } catch (error) {
             console.error("Erro ao atualizar cliente aq: ", error);
         }
@@ -51,7 +50,6 @@ export default function SettingPage({ route }) {
     const saveContact = async () => {
         try {
             const contact = await createContact(token, numberInput, emailInput);
-            console.log("Contact: ", contact);
         } catch (error) {
             console.error("Erro ao criar contato aqui", error);
         }
@@ -146,7 +144,6 @@ export default function SettingPage({ route }) {
 
 
     const gallery = async () => {
-        console.log('uaiii')
         const result = ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
@@ -158,14 +155,14 @@ export default function SettingPage({ route }) {
 
         if (!(await result).canceled) {
             setImage((await result).assets[0].uri)
-        }else{
+        } else {
             return
         }
     }
 
     const sendImageFunc = async () => {
         const formData = new FormData();
-        if(image === ''){
+        if (image === '') {
             Alert.alert(
                 '',
                 'Escolha uma imagem para atualizar!',
@@ -181,23 +178,22 @@ export default function SettingPage({ route }) {
         }
         formData.append('picture', {
             uri: image,
-            type: 'image/jpeg', 
+            type: 'image/jpeg',
             name: 'profile.jpg',
         });
         try {
-            console.log(formData)
             const response = await sendPicture(token, formData)
             createAlert("Foto de perfil atualizada com sucesso!")
         } catch (error) {
             console.error('Erro ao criar instância do modelo comm', error);
         }
     };
-    
+
 
 
     return (
         <View style={defaultStyle.container}>
-            <View style={defaultStyle.logoArea}>
+            <View style={[defaultStyle.logoArea, { marginTop: 20 }]}>
                 <Image
                     source={require('../../assets/img/logo.png')}
                 />
@@ -247,18 +243,19 @@ export default function SettingPage({ route }) {
 
             {title === 'Alterar foto de perfil' && (
                 <View style={{ alignItems: 'center' }}>
-                    {accountData.client.client.picture === null && image === '' ? (
+                    {accountData.client.client.picture === null && image === '' && (
                         <View style={styles.iconProfile}>
                             <Ionicons name='person-outline' size={60} color={"#A2A2A2"} />
                         </View>
-                    ) : (
-                        <Image source={{ uri: `http://192.168.0.144:8000${accountData.client.client.picture}`}} style={styles.iconProfile}/>
+                    )}
+                    {accountData.client.client.picture !== null && image === '' && (
+                        <Image source={{ uri: `http://10.109.71.5:8000${accountData.client.client.picture}` }} style={styles.img} />
                     )}
                     {image !== '' && (
                         <Image source={{ uri: image }} style={styles.img} />
                     )}
-                     <PressableButton bgColor={'#D3FE57'} marginTop={'70px'} title={'Escolher Foto'} onPress={gallery} />
-                    <PressableButton bgColor={'#D3FE57'} title={'Confirmar'} onPress={sendImageFunc}/>
+                    <PressableButton bgColor={'#D3FE57'} marginTop={'70px'} title={'Escolher Foto'} onPress={gallery} />
+                    <PressableButton bgColor={'#D3FE57'} title={'Confirmar'} onPress={sendImageFunc} />
                 </View>
             )}
         </View>

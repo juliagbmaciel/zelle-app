@@ -23,8 +23,6 @@ export async function createUser(cpf, password, completeName) {
 
 export async function createClient(name, socialName, dateOfBirth, token) {
   try {
-    console.log('criando cliente....', token)
-    console.log(name, socialName, dateOfBirth)
 
     const responseClient = await axiosInstance.post('clients/', {
       name: name,
@@ -117,7 +115,6 @@ export async function createAccount(token) {
 
 export async function getAccount(token) {
 
-  console.log('aa')
   try {
     const response = await axiosInstance.get('client-all',
       {
@@ -135,8 +132,6 @@ export async function getAccount(token) {
 
 
 export async function createCard(token) {
-  console.log('aa');
-  console.log(token);
 
   try {
     const response = await axiosInstance.post(
@@ -175,7 +170,6 @@ export async function getCards(token, accountId) {
 export async function updateClient(token, field, value) {
   try {
     if (field === 'name') {
-      console.log('hiii')
       const response = await axiosInstance.patch('clients/id/',
         { name: value },
         {
@@ -194,7 +188,6 @@ export async function updateClient(token, field, value) {
 
 export async function getContacts(token) {
   try {
-    console.log('pegando contato')
     const response = await axiosInstance.get('contacts/',
       {
         headers: {

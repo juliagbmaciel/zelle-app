@@ -28,13 +28,11 @@ const Login = ({ navigation }) => {
 
         try {
             const tokenData = await getToken(values.cpf, values.password);
-            console.log("Token obtido:", tokenData.auth_token);
             if (tokenData){
                 dispatch(setToken(tokenData.auth_token));
                 dispatch(setSigned(true))
             }
         } catch (error) {
-            console.log(error)
             Alert.alert(
                 'Ops...',
                 'Email ou senha inválidos...',
