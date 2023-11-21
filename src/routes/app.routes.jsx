@@ -3,7 +3,8 @@ import {
     CreateCard,
     Home,
     CardCreated,
-    SettingPage
+    SettingPage,
+    Transfer
 } from '../../screens'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -35,6 +36,11 @@ const AppRoutes = () => (
         <AppStack.Screen
             name='SettingPage'
             component={SettingPage}
+            options={{ headerShown: false, animation: 'fade_from_bottom' }}
+        />
+        <AppStack.Screen
+            name='Transfer'
+            component={Transfer}
             options={{ headerShown: false, animation: 'fade_from_bottom' }}
         />
     </AppStack.Navigator>
