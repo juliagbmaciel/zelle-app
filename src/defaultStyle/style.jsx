@@ -12,9 +12,19 @@ const styles = StyleSheet.create({
     logoArea: {
         display: 'flex',
         alignItems: 'flex-end',
-        marginTop: 41,
+        // marginTop: 41,
         
     },
+    title: {
+        color: '#FFF',
+        fontFamily: 'medium',
+        fontSize: 28
+    },
+    subtitle: {
+        fontFamily: 'regular',
+        color: "rgba(255, 255, 255, 0.61)",
+        fontSize: 17.18
+    }
     
 
 })

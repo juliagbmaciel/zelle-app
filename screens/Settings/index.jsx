@@ -1,9 +1,11 @@
-import { View, Text, SafeAreaView, Image } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import SettingsRow from '../../components/SettingsRow'
 import { Ionicons } from '@expo/vector-icons'
 import styles from './styles'
-import defaultSyle from '../../src/defaultStyle/style'
+import defaultStyle from '../../src/defaultStyle/style'
 import { useSelector } from 'react-redux'
+import { SafeAreaView } from 'react-native-safe-area-context'
+
 
 export default function Settings() {
 
@@ -28,8 +30,8 @@ export default function Settings() {
 
 
     return (
-        <SafeAreaView style={defaultSyle.container}>
-            <View style={defaultSyle.logoArea}>
+        <SafeAreaView style={defaultStyle.container}>
+            <View style={defaultStyle.logoArea}>
                 <Image
                     source={require('../../assets/img/logo.png')}
                 />
@@ -40,7 +42,7 @@ export default function Settings() {
                         <Ionicons name='person-outline' size={18} color={"#A2A2A2"} />
                     </View>
                 ) : (
-                    <Image source={{uri: `http://192.168.0.144:8000${imageUri}`}}  style={styles.iconProfile}/>
+                    <Image source={{uri: `http://10.109.71.5:8000${imageUri}`}}  style={styles.iconProfile}/>
                 )}
 
                 <View>
