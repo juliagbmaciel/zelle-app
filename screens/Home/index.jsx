@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ActivityIndicator, Modal } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -6,19 +6,19 @@ import {
 } from '@expo/vector-icons'
 import styles from './styles.jsx'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import Svg, { Path, Rect } from 'react-native-svg';
+import Svg, { Path } from 'react-native-svg';
 import { getAccount } from '../../src/services/api.jsx'
 import { setAccountData } from '../../src/reducers/actions.jsx'
 import defaultStyle from '../../src/defaultStyle/style.jsx'
 
-const Home = () => {
+
+const Home = ({ navigation }) => {
 
 
     const { token } = useSelector(state => {
         return state.userReducer
     })
     const [hideBalance, setHideBalance] = useState(false);
-    const [imageUri, setImageUri] = useState('')
     const [accountDataApi, setAccountDataApi] = useState({
         data: null,
         loading: true,
@@ -71,8 +71,6 @@ const Home = () => {
 
         ) : (
             <SafeAreaView style={defaultStyle.container}>
-                {console.log(accountDataApi.data.client.client.picture)}
-                {/* <Image source={{uri: accountDataApi.data.client.client.picture}} style={{width: 200, height: 200}}/> */}
                 <View style={defaultStyle.logoArea}>
                     <Image
                         source={require('../../assets/img/logo.png')}
@@ -86,8 +84,8 @@ const Home = () => {
                             <Ionicons name='person-outline' size={18} color={"#A2A2A2"} />
                         </View>
                     ) : (
-                        <Image source={{uri: `http://192.168.0.144:8000${accountDataApi.data.client.client.picture}`}} style={styles.iconProfile}/>
-                        )}
+                        <Image source={{ uri: `http://10.109.71.5:8000${accountDataApi.data.client.client.picture}` }} style={styles.iconProfile} />
+                    )}
 
                     <View>
                         <Text style={styles.subTitle}>Olá,</Text>
@@ -106,7 +104,7 @@ const Home = () => {
                 <View style={styles.main}>
                     <Text style={styles.title}>Operações</Text>
                     <View style={styles.row}>
-                        <TouchableOpacity style={styles.card}>
+                        <TouchableOpacity style={styles.card} onPress={() => {navigation.navigate('Transfer')}}>
                             <FontAwesome name='exchange' color={"#fff"} size={20} />
                             <Text style={styles.cardLetter}>Transferência</Text>
                         </TouchableOpacity>
