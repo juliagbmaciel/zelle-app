@@ -146,7 +146,7 @@ export async function createCard(token) {
 
     return response.data;
   } catch (error) {
-    console.log("Deu erro");
+    console.error(error.response.data);
     throw error;
   }
 }
