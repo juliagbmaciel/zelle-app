@@ -18,6 +18,17 @@ const CreateCard = ({ navigation }) => {
             navigation.navigate('CardCreated', {card})
 
         } catch (error) {
+            Alert.alert(
+                '',
+                `${error.response.data}`,
+                [
+                    {
+                        text: 'OK',
+                        style: 'destructive',
+                        onPress: () => { },
+                    },
+                ]
+            );
             console.error("Erro ao criar o cartão: ", error);
         }
         

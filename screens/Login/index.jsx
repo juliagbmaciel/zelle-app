@@ -33,9 +33,10 @@ const Login = ({ navigation }) => {
                 dispatch(setSigned(true))
             }
         } catch (error) {
+            console.log()
             Alert.alert(
                 'Ops...',
-                'Email ou senha inválidos...',
+                `${error.response.data.non_field_errors}`,
                 [
                     {
                         text: 'Cancelar',
