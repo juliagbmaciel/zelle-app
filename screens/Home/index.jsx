@@ -68,7 +68,6 @@ const Home = ({ navigation }) => {
             <View style={{ backgroundColor: "#000", flex: 1, justifyContent: 'center' }}>
                 <ActivityIndicator size={60} color={"#D3FE57"} />
             </View>
-
         ) : (
             <SafeAreaView style={defaultStyle.container}>
                 <View style={defaultStyle.logoArea}>
