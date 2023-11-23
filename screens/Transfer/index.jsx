@@ -3,27 +3,31 @@ import defaultStyle from '../../src/defaultStyle/style'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { TextInputMask } from 'react-native-masked-text';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons'
 import styles from './styles';
+import { setTransferData } from '../../src/reducers/actions.jsx'
+import { getClientByCpf } from '../../src/services/api.jsx';
 
 
-export default function Transfer() {
+
+export default function Transfer({ navigation }) {
 
     const [moneyValue, setMoneyValue] = useState('0');
     const [keyValue, setKeyValue] = useState('');
     const [isValueScreen, setIsValueScreen] = useState(true)
     const [isCNPJ, setIsCNPJ] = useState(false)
     const [valid, setValid] = useState(false)
-
-    const { accountData } = useSelector(state => {
+    const [newValue, setNewValue] = useState(false)
+   
+    const dispatch = useDispatch()
+    const { accountData, token } = useSelector(state => {
         return state.userReducer;
     })
     const balance = accountData.account.balance
     const balanceFormatted = balance.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
-
     const validValueTransfer = () => {
-        const newValue = extractNumericNumber(moneyValue)
+        setNewValue(extractNumericNumber(moneyValue))
         if (newValue === 0) {
             Alert.alert(
                 '',
@@ -39,7 +43,6 @@ export default function Transfer() {
             return
         }
         setIsValueScreen(false)
-        console.log(newValue)
     }
 
     function extractNumericNumber(str) {
@@ -53,28 +56,60 @@ export default function Transfer() {
 
 
     function setValueCpfCnpj(text) {
-        console.log(text.length)
-        if (text.length > 13) {
-            console.log('true')
-            setIsCNPJ(true)
-        }else{
-            console.log('false')
-            setIsCNPJ(false)
-        }
-        
-        setKeyValue(text)
 
-        if (text.length === 14) {
-            setValid(true)
-        } else if (text.length === 18) {
-            setValid(true)
-        } else {
-            setValid(false)
-        }
+        setIsCNPJ(text.length > 13);
+    
+        setKeyValue(text);
+    
+        const isValidLength = text.length === 14 || text.length === 18;
+        setValid(isValidLength);
     }
 
 
+    function removeSpecialCharacters(input) {
+        return input.replace(/[^0-9]/g, '');
+    }
 
+
+    async function fetchData (){
+        // setAccountDataApi((prevState) => ({ ...prevState, loading: true }));
+
+        try {
+            const client_receiver = await getClientByCpf(token, removeSpecialCharacters(keyValue));
+            if (client_receiver.client.client.user.cpf === accountData.client.client.user.cpf){
+                Alert.alert(
+                    '',
+                    'Contas de origem e destino não devem ser iguais.',
+                    [
+                        {
+                            text: 'OK',
+                            style: 'destructive',
+                            onPress: () => { },
+                        },
+                    ]
+                );
+            }else{
+                dispatch(setTransferData({
+                    value: newValue,
+                    key: removeSpecialCharacters(keyValue),
+                    client_receiver: client_receiver.client.client
+                    }))
+                navigation.navigate('TransferView')
+            }
+        } catch (error) {
+            Alert.alert(
+                '',
+                `${error.response.data.detail}`,
+                [
+                    {
+                        text: 'OK',
+                        style: 'destructive',
+                        onPress: () => { },
+                    },
+                ]
+            );
+        }
+    };
 
     return (
         isValueScreen ? (
@@ -126,7 +161,9 @@ export default function Transfer() {
                     onChangeText={(text) => setValueCpfCnpj(text)}
                 />
                 {valid && (
-                    <TouchableOpacity style={styles.button} onPress={() => { }}>
+                    <TouchableOpacity style={styles.button} onPress={() => {
+                        fetchData()
+                        }}>
                         <Ionicons name='arrow-forward-outline' size={30} />
                     </TouchableOpacity>
                 )}
