@@ -4,7 +4,9 @@ import {
     Home,
     CardCreated,
     SettingPage,
-    Transfer
+    Transfer,
+    TransferView,
+    TransferChoice
 } from '../../screens'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -41,6 +43,16 @@ const AppRoutes = () => (
         <AppStack.Screen
             name='Transfer'
             component={Transfer}
+            options={{ headerShown: false, animation: 'fade_from_bottom' }}
+        />
+        <AppStack.Screen
+            name='TransferView'
+            component={TransferView}
+            options={{ headerShown: false, animation: 'fade_from_bottom' }}
+        />
+        <AppStack.Screen
+            name='TransferChoice'
+            component={TransferChoice}
             options={{ headerShown: false, animation: 'fade_from_bottom' }}
         />
     </AppStack.Navigator>
