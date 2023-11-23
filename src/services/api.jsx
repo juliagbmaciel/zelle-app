@@ -244,6 +244,23 @@ export async function sendPicture(token, formData) {
   }
 }
 
+export async function getClientByCpf(token, key) {
+  try {
+    const response = await axiosInstance.get(`client/by-cpf/?cpf=${key}`,
+      {
+        headers: {
+          'Authorization': `Token ${token}`,
+        }
+      }
+    )
+    return response.data
+
+  } catch (error) {
+    console.log(error.response.data)
+    throw error
+  }
+}
+
 
 
 
