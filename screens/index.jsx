@@ -10,6 +10,8 @@ import CardCreated from './CardCreated/index.jsx'
 import Settings from './Settings/index.jsx'
 import SettingPage from './SettingPage/index.jsx'
 import Transfer from './Transfer/index.jsx'
+import TransferView from './TransferView/index.jsx'
+import TransferChoice from './TransferChoice/index.jsx'
 
 
 export {
@@ -24,5 +26,7 @@ export {
     CardCreated,
     Settings,
     SettingPage,
-    Transfer
+    Transfer,
+    TransferView,
+    TransferChoice
 }
