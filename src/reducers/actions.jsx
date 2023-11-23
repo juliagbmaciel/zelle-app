@@ -12,6 +12,7 @@ export const SET_SIGNED = 'SET_SIGNED'
 export const SET_DATE_OF_BIRTH = 'SET_DATE_OF_BIRTH'
 export const SET_CLIENT_DATA = 'SET_CLIENT_DATA'
 export const SET_ACCOUNT_DATA = 'SET_ACCOUNT_DATA'
+export const SET_TRANSFER_DATA = 'SET_TRANSFER_DATA'
 
 
 
@@ -115,4 +116,11 @@ export const resetState = () => dispatch => {
     dispatch({
       type: RESET_STATE,
     });
+};
+
+export const setTransferData = (transferData) => dispatch => {
+  dispatch({
+    type: SET_TRANSFER_DATA,
+    payload: transferData
+  });
 };
