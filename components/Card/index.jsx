@@ -10,7 +10,7 @@ import PressableButton from '../Buttons'
 const Card = ({props, seeBill}) => {
     const number = props.item.number;
     
-    const limit = parseFloat(props.item.limit);
+    const limit = parseFloat(props.item.limit_available);
     const limitFormatted = limit.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
     const banner = props.item.banner
