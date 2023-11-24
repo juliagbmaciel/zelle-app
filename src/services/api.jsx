@@ -262,6 +262,25 @@ export async function getClientByCpf(token, key) {
 }
 
 
+export async function makeTransaction(token, cpf, amount, type) {
+  try {
+    const response = await axiosInstance.post(`transfer/?cpf=${cpf}`,
+      {type: type,
+      amount: amount},
+      {
+        headers: {
+          'Authorization': `Token ${token}`,
+        }
+      }
+    )
+    return response.data
+
+  } catch (error) {
+    console.log(error.response.data)
+    throw error
+  }
+}
+
 
 
 
