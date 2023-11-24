@@ -6,7 +6,8 @@ import {
     SettingPage,
     Transfer,
     TransferView,
-    TransferChoice
+    TransferChoice,
+    BankStatement
 } from '../../screens'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -53,6 +54,11 @@ const AppRoutes = () => (
         <AppStack.Screen
             name='TransferChoice'
             component={TransferChoice}
+            options={{ headerShown: false, animation: 'fade_from_bottom' }}
+        />
+        <AppStack.Screen
+            name='BankStatement'
+            component={BankStatement}
             options={{ headerShown: false, animation: 'fade_from_bottom' }}
         />
     </AppStack.Navigator>
