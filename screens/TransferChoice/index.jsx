@@ -1,15 +1,17 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, Alert } from 'react-native'
 import defaultStyle from '../../src/defaultStyle/style'
 import { useSelector } from 'react-redux'
 import styles from './styles'
 import React, { useState, useEffect } from 'react'
 import PressableButton from '../../components/Buttons'
-import { getCards } from '../../src/services/api'
+import { getCards, makeTransaction } from '../../src/services/api'
 import { RadioButton } from 'react-native-paper';
+import { CommonActions } from '@react-navigation/native'
 
 const TransferChoice = ({ navigation }) => {
-    const [checked, setChecked] = useState('account');
+    const [checked, setChecked] = useState('conta');
     const [limit, setLimit] = useState('0');
+
 
     const { transferData, token, accountData } = useSelector(state => {
         return state.userReducer
@@ -28,7 +30,6 @@ const TransferChoice = ({ navigation }) => {
     const balanceFormatted = balance.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
 
-
     async function getCardsData() {
         try {
             const cards = await getCards(token, accountData.account.id)
@@ -39,14 +40,47 @@ const TransferChoice = ({ navigation }) => {
                 loading: false,
                 data: false
             })
-
             const limit = parseFloat(cards[0].limit_available)
+            console.log('aaaa')
             const limitFormatted = limit.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
             setLimit(limitFormatted)
+
+
+
         } catch (error) {
             console.error(error.response.data)
         }
 
+    }
+
+    async function transaction() {
+        try {
+            console.log(token)
+            console.log(transferData.value)
+            const response = await makeTransaction(token, transferData.client_receiver.user.cpf, transferData.value, checked)
+            console.log(response)
+            Alert.alert(
+                '',
+                `${response.message}`,
+                [
+                    {
+                        text: 'OK',
+                        style: 'destructive',
+                        onPress: () => {
+                            navigation.dispatch(CommonActions.reset({
+                                index: 0,
+                                routes: [
+                                    { name: 'Bottom Navigation' },
+                                ],
+                            }))
+
+                        },
+                    },
+                ]
+            );
+        } catch (error) {
+            // console.log(error)
+        }
     }
 
 
@@ -72,40 +106,50 @@ const TransferChoice = ({ navigation }) => {
                 {transferData.value <= accountData.account.balance && (
                     <View style={styles.row}>
                         <RadioButton
-                            value="account"
-                            status={checked === 'account' ? 'checked' : 'unchecked'}
-                            onPress={() => setChecked('account')}
+                            value="conta"
+                            status={checked === 'conta' ? 'checked' : 'unchecked'}
+                            onPress={() => setChecked('conta')}
                             color='#fff'
                         />
-                        <View onPress={() => setChecked('account')}>
-                            <Text style={styles.label} >
+                        <View >
+                            <Text style={styles.label} onPress={() => setChecked('conta')}>
                                 Transferir com saldo da conta
-                            </Text>
-                            <Text style={styles.subtitle}>O seu saldo atual é de {balanceFormatted}</Text>
+                            </Text >
+                            <Text style={styles.subtitle} onPress={() => setChecked('conta')}>O seu saldo atual é de {balanceFormatted}</Text>
                         </View>
                     </View>
                 )}
 
-                {cardData.data !== false && (
-                    <View style={styles.row}>
+                {cardData.data !== false && cardData.data[0].limit_available > transferData.value && (
+                    <View style={styles.row} >
                         <RadioButton
-                            value="credit"
-                            status={checked === 'credit' ? 'checked' : 'unchecked'}
-                            onPress={() => setChecked('credit')}
+                            value="cartao"
+                            status={checked === 'cartao' ? 'checked' : 'unchecked'}
+                            onPress={() => setChecked('cartao')}
                             color='#fff'
                         />
-                        <View>
-                            <Text style={styles.label} onPress={() => setChecked('credit')}>
+                        <View >
+                            <Text style={styles.label} onPress={() => setChecked('cartao')} >
                                 Transferir com cartão de crédito
                             </Text>
-                            <Text style={styles.subtitle}>Limite disponível {limit}</Text>
+                            <Text style={styles.subtitle} onPress={() => setChecked('cartao')}>Limite disponível {limit}</Text>
                         </View>
 
                     </View>
                 )}
+
+
 
 
             </View>
+            {cardData.data !== false && transferData.value > cardData.data[0].limit_available && transferData.value > accountData.account.balance || cardData.data === false && transferData.value > accountData.account.balance ? (
+                <Text style={styles.feedback}>Você não possui saldo suficiente para essa transação :(</Text>
+            ) : (
+                <View style={{ position: 'absolute', bottom: 30, width: '100%', alignSelf: 'center' }}>
+                    <PressableButton title={'Confirmar'} bgColor={"#D3FE57"} onPress={transaction} />
+                </View>
+            )
+            }
         </View>)
 
     )
