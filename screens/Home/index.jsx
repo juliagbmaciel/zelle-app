@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, ActivityIndicator, Modal } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -116,10 +116,10 @@ const Home = ({ navigation }) => {
                                 empréstimo
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.card}>
+                        <TouchableOpacity style={styles.card}  onPress={() => {navigation.navigate('BankStatement')}}>
                             <SimpleLineIcons name='graph' color={"#fff"} size={20} />
                             <Text style={styles.cardLetter}>
-                                Investir
+                                Extrato
                             </Text>
                         </TouchableOpacity>
                     </View>
