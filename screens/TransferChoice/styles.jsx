@@ -20,6 +20,12 @@ const styles = StyleSheet.create({
         fontFamily: 'regular',
         color: "rgba(255, 255, 255, 0.61)",
         fontSize: 15
+    },
+    feedback: {
+        color: '#fff',
+        fontFamily: 'medium',
+        fontSize: 20,
+        textAlign: 'center'
     }
 
 
