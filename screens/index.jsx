@@ -12,6 +12,7 @@ import SettingPage from './SettingPage/index.jsx'
 import Transfer from './Transfer/index.jsx'
 import TransferView from './TransferView/index.jsx'
 import TransferChoice from './TransferChoice/index.jsx'
+import BankStatement from './BankStatement/index.jsx'
 
 
 export {
@@ -28,5 +29,6 @@ export {
     SettingPage,
     Transfer,
     TransferView,
-    TransferChoice
+    TransferChoice,
+    BankStatement
 }
