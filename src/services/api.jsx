@@ -48,6 +48,7 @@ export async function getToken(cpf, password) {
     return responseToken.data;
   } catch (error) {
     console.log("erro ao fazer login;...")
+    console.log(error.response.data)
     throw error;
   }
 }
@@ -109,6 +110,7 @@ export async function createAccount(token) {
     return response.data
   } catch (error) {
     console.log("Deu erro")
+    console.log(error.response.data)
     throw error
   }
 }
@@ -267,6 +269,23 @@ export async function makeTransaction(token, cpf, amount, type) {
     const response = await axiosInstance.post(`transfer/?cpf=${cpf}`,
       {type: type,
       amount: amount},
+      {
+        headers: {
+          'Authorization': `Token ${token}`,
+        }
+      }
+    )
+    return response.data
+
+  } catch (error) {
+    console.log(error.response.data)
+    throw error
+  }
+}
+
+export async function getTransactions(token, type) {
+  try {
+    const response = await axiosInstance.get(`transfer/?type=${type}`,
       {
         headers: {
           'Authorization': `Token ${token}`,
