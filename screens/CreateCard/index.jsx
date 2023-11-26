@@ -29,7 +29,7 @@ const CreateCard = ({ navigation }) => {
                     },
                 ]
             );
-            console.error("Erro ao criar o cartão: ", error);
+            
         }
         
     };
