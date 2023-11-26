@@ -8,12 +8,11 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         borderBottomWidth: 1,
         borderBottomColor: '#232321',
-        flexDirection: 'row',
-        gap: 15,
-        alignItems: 'center'
+        justifyContent: 'space-between',
+        flexDirection: 'row'
     },
     rowIcon: {
-        backgroundColor: '#000',
+        backgroundColor: '#5A5A5A',
         width: 40,
         height: 40,
         borderRadius: 50,
@@ -29,6 +28,15 @@ const styles = StyleSheet.create({
         fontFamily: 'regular',
         color: "rgba(255, 255, 255, 0.61)",
         fontSize: 15
+    },
+    rowGreenIcon: {
+        backgroundColor: 'rgba(32, 101, 52, 0.53)'
+    },
+    mainContainer: {
+        flexDirection: 'row',
+        gap: 15,
+        alignItems: 'center',
+        position: 'relative'
     }
 
 
