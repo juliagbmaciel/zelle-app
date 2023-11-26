@@ -5,6 +5,9 @@ import styles from './styles'
 import defaultStyle from '../../src/defaultStyle/style'
 import { useSelector } from 'react-redux'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import PressableButton from '../../components/Buttons'
+import { resetState } from '../../src/reducers/actions'
+import { useDispatch } from 'react-redux'
 
 
 export default function Settings() {
@@ -16,6 +19,8 @@ export default function Settings() {
     const number = accountData.account.number
     const name = accountData.client.client.name
     const imageUri = accountData.client.client.picture
+
+    const dispatch = useDispatch()
 
 
     const dataRows = [
@@ -42,7 +47,7 @@ export default function Settings() {
                         <Ionicons name='person-outline' size={18} color={"#A2A2A2"} />
                     </View>
                 ) : (
-                    <Image source={{uri: `http://10.109.71.5:8000${imageUri}`}}  style={styles.iconProfile}/>
+                    <Image source={{uri: `http://192.168.0.144:8000${imageUri}`}}  style={styles.iconProfile}/>
                 )}
 
                 <View>
@@ -56,6 +61,7 @@ export default function Settings() {
                     return <SettingsRow title={item.title} key={index} />
                 })}
             </View>
+            <PressableButton title={'Sair do aplicativo'} bgColor={'#D3FE57'} onPress={() => {dispatch(resetState())}}/>
 
         </SafeAreaView>
     )
