@@ -47,9 +47,9 @@ const BottomTabNavigation = () => {
             <Tab.Screen name="Settings" component={Settings} options={{
                 tabBarIcon: ({ focused }) => <CustomTabIcon focused={focused} type={'settings'} />
             }} />
-            <Tab.Screen name="Profile" component={Home} options={{
+            {/* <Tab.Screen name="Profile" component={Home} options={{
                 tabBarIcon: ({ focused }) => <CustomTabIcon focused={focused} type={'profile'} />
-            }} />
+            }} /> */}
         </Tab.Navigator>
     )
 }
