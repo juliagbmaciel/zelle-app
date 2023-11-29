@@ -47,7 +47,7 @@ export default function Settings() {
                         <Ionicons name='person-outline' size={18} color={"#A2A2A2"} />
                     </View>
                 ) : (
-                    <Image source={{uri: `http://192.168.0.144:8000${imageUri}`}}  style={styles.iconProfile}/>
+                    <Image source={{uri: `http://10.109.71.5:8000${imageUri}`}}  style={styles.iconProfile}/>
                 )}
 
                 <View>
