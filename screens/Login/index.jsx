@@ -36,7 +36,7 @@ const Login = ({ navigation }) => {
             console.log()
             Alert.alert(
                 'Ops...',
-                `${error.response.data.non_field_errors}`,
+                `${error.response.data.non_field_errors ? error.response.data.non_field_errors : error.response.data.detail}`,
                 [
                     {
                         text: 'Cancelar',
