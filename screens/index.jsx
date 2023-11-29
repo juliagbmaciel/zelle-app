@@ -13,6 +13,7 @@ import Transfer from './Transfer/index.jsx'
 import TransferView from './TransferView/index.jsx'
 import TransferChoice from './TransferChoice/index.jsx'
 import BankStatement from './BankStatement/index.jsx'
+import Loan from './Loan/index.jsx'
 
 
 export {
@@ -30,5 +31,6 @@ export {
     Transfer,
     TransferView,
     TransferChoice,
-    BankStatement
+    BankStatement,
+    Loan
 }
