@@ -301,5 +301,24 @@ export async function getTransactions(token, type) {
 }
 
 
+export async function createLoan(token, amount, installments) {
+  try {
+    const response = await axiosInstance.post(`loans/`,
+      {amount_requested: amount,
+      number_installments: installments},
+      {
+        headers: {
+          'Authorization': `Token ${token}`,
+        }
+      }
+    )
+    return response.data
+
+  } catch (error) {
+    throw error
+  }
+}
+
+
 
 
