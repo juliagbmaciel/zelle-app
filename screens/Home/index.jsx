@@ -107,7 +107,7 @@ const Home = ({ navigation }) => {
                             <FontAwesome name='exchange' color={"#fff"} size={20} />
                             <Text style={styles.cardLetter}>Transferência</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.card}>
+                        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Loan')}>
                             <FontAwesome name='money' color={"#fff"} size={20} />
                             <Text style={styles.cardLetter}>
                                 Solicitar
