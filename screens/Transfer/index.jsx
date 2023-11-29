@@ -28,7 +28,7 @@ export default function Transfer({ navigation }) {
     const balanceFormatted = balance.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
     const validValueTransfer = () => {
         setNewValue(extractNumericNumber(moneyValue))
-        if (newValue === 0) {
+        if (extractNumericNumber(moneyValue) == 0) {
             Alert.alert(
                 '',
                 'O valor não pode ser igual a 0',
