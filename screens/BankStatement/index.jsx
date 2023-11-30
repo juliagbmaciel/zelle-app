@@ -1,6 +1,6 @@
 import { View, Text, Image, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
 import {
-    Ionicons, FontAwesome, SimpleLineIcons
+    Ionicons
 } from '@expo/vector-icons'
 import styles from './styles.jsx'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -10,6 +10,7 @@ import { getTransactions } from '../../src/services/api.jsx'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { CommonActions } from '@react-navigation/native'
 
 
 
@@ -26,7 +27,6 @@ const BankStatement = ({ navigation }) => {
     const fetchData = async () => {
         try {
             const transactions = await getTransactions(token, 'all')
-            console.log(transactions)
             setTransactions({
                 loading: false,
                 data: transactions
@@ -45,7 +45,14 @@ const BankStatement = ({ navigation }) => {
         <SafeAreaView style={defaultStyle.container}>
             <View style={{ gap: 40 }}>
                 <TouchableOpacity>
-                    <Ionicons name='arrow-back' color={'#fff'} size={30} onPress={() => navigation.goBack()} />
+                    <Ionicons name='arrow-back' color={'#fff'} size={30} onPress={() => {
+                        navigation.dispatch(CommonActions.reset({
+                            index: 0,
+                            routes: [
+                                { name: 'Bottom Navigation' },
+                            ],
+                        }))
+                    }} />
                 </TouchableOpacity>
                 <Text style={defaultStyle.title}> Histórico </Text>
             </View>

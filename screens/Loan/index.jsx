@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons'
 import styles from './styles';
 import { createLoan } from '../../src/services/api.jsx';
+import { setLoan } from '../../src/reducers/actions.jsx';
+import { CommonActions } from '@react-navigation/native';
 
 
 
@@ -16,18 +18,16 @@ export default function Loan({ navigation }) {
     const [installments, setInstallments] = useState(0);
     const [isValueScreen, setIsValueScreen] = useState(true)
     const [newValue, setNewValue] = useState(false)
-   
-    const dispatch = useDispatch()
-    const { accountData, token } = useSelector(state => {
+
+    const { token } = useSelector(state => {
         return state.userReducer;
     })
-    const balance = accountData.account.balance
-    const balanceFormatted = balance.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
-    
-    
-    const validValueLoan =  () => {
+    const dispatch = useDispatch()
 
-         setNewValue(extractNumericNumber(moneyValue))
+
+    const validValueLoan = () => {
+
+        setNewValue(extractNumericNumber(moneyValue))
 
         if (extractNumericNumber(moneyValue) == 0.00) {
             Alert.alert(
@@ -58,21 +58,17 @@ export default function Loan({ navigation }) {
 
 
     const handleInputChange = (text) => {
-        // Remove caracteres não numéricos
         const cleanedText = text.replace(/[^0-9]/g, '');
         setInstallments(cleanedText);
-        console.log(cleanedText)
     };
 
 
-    async function makeLoan (){
-
+    async function makeLoan() {
         try {
             const loan = await createLoan(token, newValue, installments)
-            console.log(loan)
+            dispatch(setLoan(loan))
+            navigation.navigate('LoanView')
         } catch (error) {
-            console.log(error[0])
-            console.log('entrei aq')
             Alert.alert(
                 '',
                 `${error.response.data}`,
@@ -95,6 +91,14 @@ export default function Loan({ navigation }) {
                         source={require('../../assets/img/logo.png')}
                     />
                 </View>
+                <Ionicons name='arrow-back' color={'#fff'} size={30} onPress={() => {
+                    navigation.dispatch(CommonActions.reset({
+                        index: 0,
+                        routes: [
+                            { name: 'Bottom Navigation' },
+                        ],
+                    }))
+                }} />
                 <View style={{ marginTop: 30 }}>
                     <Text style={defaultStyle.title} >Quanto você deseja pegar emprestado?</Text>
                 </View>
@@ -119,11 +123,21 @@ export default function Loan({ navigation }) {
             </SafeAreaView>
         ) : (
             <SafeAreaView style={defaultStyle.container}>
+
                 <View style={defaultStyle.logoArea}>
                     <Image
                         source={require('../../assets/img/logo.png')}
                     />
+
                 </View>
+                <Ionicons name='arrow-back' color={'#fff'} size={30} onPress={() => {
+                    navigation.dispatch(CommonActions.reset({
+                        index: 0,
+                        routes: [
+                            { name: 'Bottom Navigation' },
+                        ],
+                    }))
+                }} />
 
                 <View style={{ marginTop: 30 }}>
                     <Text style={defaultStyle.title} >Em quantas parcelas deseja dividir?</Text>
