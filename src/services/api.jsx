@@ -320,5 +320,22 @@ export async function createLoan(token, amount, installments) {
 }
 
 
+export async function getInstallments(token, loan) {
+  try {
+    const response = await axiosInstance.get(`view-installments/?loan=${loan}`,
+      {
+        headers: {
+          'Authorization': `Token ${token}`,
+        }
+      }
+    )
+    return response.data
+
+  } catch (error) {
+    throw error
+  }
+}
+
+
 
 

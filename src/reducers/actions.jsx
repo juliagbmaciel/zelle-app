@@ -13,6 +13,7 @@ export const SET_DATE_OF_BIRTH = 'SET_DATE_OF_BIRTH'
 export const SET_CLIENT_DATA = 'SET_CLIENT_DATA'
 export const SET_ACCOUNT_DATA = 'SET_ACCOUNT_DATA'
 export const SET_TRANSFER_DATA = 'SET_TRANSFER_DATA'
+export const SET_LOAN = 'SET_LOAN'
 
 
 
@@ -122,5 +123,13 @@ export const setTransferData = (transferData) => dispatch => {
   dispatch({
     type: SET_TRANSFER_DATA,
     payload: transferData
+  });
+};
+
+
+export const setLoan = (loan) => dispatch => {
+  dispatch({
+    type: SET_LOAN,
+    payload: loan
   });
 };

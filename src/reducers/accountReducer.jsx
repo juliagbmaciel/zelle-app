@@ -13,7 +13,8 @@ import {
     SET_DATE_OF_BIRTH,
     SET_CLIENT_DATA,
     SET_ACCOUNT_DATA,
-    SET_TRANSFER_DATA
+    SET_TRANSFER_DATA,
+    SET_LOAN
 } from "./actions";
 
 const initialSTate = {
@@ -31,7 +32,8 @@ const initialSTate = {
     signed: false,
     clientData: {},
     accountData: {},
-    transferData: {}
+    transferData: {},
+    loanData: {}
 }
 
 
@@ -67,7 +69,9 @@ function userReducer(state = initialSTate, action) {
         case SET_ACCOUNT_DATA:
             return { ...state, accountData: action.payload }
         case SET_TRANSFER_DATA:
-                return { ...state, transferData: action.payload }
+            return { ...state, transferData: action.payload }
+        case SET_LOAN:
+            return { ...state, loanData: action.payload }
         default:
             return state;
     }
