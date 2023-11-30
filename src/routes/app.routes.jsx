@@ -8,7 +8,9 @@ import {
     TransferView,
     TransferChoice,
     BankStatement,
-    Loan
+    Loan,
+    LoanView,
+    AllLoansView
 } from '../../screens'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -65,6 +67,18 @@ const AppRoutes = () => (
         <AppStack.Screen
             name='Loan'
             component={Loan}
+            options={{ headerShown: false, animation: 'fade_from_bottom' }}
+        />
+
+        <AppStack.Screen
+            name='LoanView'
+            component={LoanView}
+            options={{ headerShown: false, animation: 'fade_from_bottom' }}
+        />
+
+        <AppStack.Screen
+            name='AllLoansView'
+            component={AllLoansView}
             options={{ headerShown: false, animation: 'fade_from_bottom' }}
         />
     </AppStack.Navigator>
