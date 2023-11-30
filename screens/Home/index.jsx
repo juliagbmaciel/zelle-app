@@ -77,7 +77,6 @@ const Home = ({ navigation }) => {
                 </View>
 
                 <View style={styles.header}>
-                    {console.log(accountDataApi.data.client.client.picture)}
                     {accountDataApi.data.client.client.picture === null ? (
                         <View style={styles.iconProfile}>
                             <Ionicons name='person-outline' size={18} color={"#A2A2A2"} />
@@ -128,9 +127,9 @@ const Home = ({ navigation }) => {
                             <FontAwesome name='money' color={"#fff"} size={20} />
                             <Text style={styles.cardLetter}>Depositar dinheiro</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.rowCard}>
-                            <Ionicons name='card-outline' color={"#fff"} size={20} />
-                            <Text style={styles.cardLetter}>Meus cartões</Text>
+                        <TouchableOpacity style={styles.rowCard} onPress={() => navigation.navigate('AllLoansView')}>
+                            <Ionicons name='hand-left-outline' color={"#fff"} size={20} />
+                            <Text style={styles.cardLetter}>Meus empréstimos</Text>
                         </TouchableOpacity>
                     </View>
                     <View>

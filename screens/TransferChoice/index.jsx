@@ -41,7 +41,6 @@ const TransferChoice = ({ navigation }) => {
                 data: false
             })
             const limit = parseFloat(cards[0].limit_available)
-            console.log('aaaa')
             const limitFormatted = limit.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
             setLimit(limitFormatted)
 
@@ -55,10 +54,7 @@ const TransferChoice = ({ navigation }) => {
 
     async function transaction() {
         try {
-            console.log(token)
-            console.log(transferData.value)
             const response = await makeTransaction(token, transferData.client_receiver.user.cpf, transferData.value, checked)
-            console.log(response)
             Alert.alert(
                 '',
                 `${response.message}`,
