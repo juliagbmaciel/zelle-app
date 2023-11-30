@@ -14,6 +14,8 @@ import TransferView from './TransferView/index.jsx'
 import TransferChoice from './TransferChoice/index.jsx'
 import BankStatement from './BankStatement/index.jsx'
 import Loan from './Loan/index.jsx'
+import LoanView from './LoanView/index.jsx'
+import AllLoansView from './AllLoansView/index.jsx'
 
 
 export {
@@ -32,5 +34,7 @@ export {
     TransferView,
     TransferChoice,
     BankStatement,
-    Loan
+    Loan,
+    LoanView,
+    AllLoansView
 }
