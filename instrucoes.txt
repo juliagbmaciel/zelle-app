@@ -1,0 +1,18 @@
+Instruções:
+
+1 - abra o cmd na pasta em que deseja clonar o arquivo
+
+2 - colar o seguinte codigo:
+git clone https://github.com/juliagbmaciel/zelle-app.git
+
+3 - digitar:
+cd zelle-app
+
+4 - digitar:
+npm install
+
+5 - digitar:
+npm run start
+
+6 - precisa ter android studio ja emulando, então, em seguida, digitar:
+a
